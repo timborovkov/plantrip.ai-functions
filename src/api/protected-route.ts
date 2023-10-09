@@ -1,5 +1,6 @@
 import "dotenv/config";
 import {
+  AuthObject,
   ClerkExpressWithAuth,
   LooseAuthProp,
   WithAuthProp,
@@ -14,7 +15,7 @@ declare global {
   }
 }
 
-router.get<{}, any>(
+router.get<{}, AuthObject>(
   "/",
   ClerkExpressWithAuth({
     // audience: "https://plantrip.ai",
