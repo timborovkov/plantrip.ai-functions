@@ -22,7 +22,8 @@
     "helmet": "^7.0.0",
     "morgan": "^1.10.0",
     "prisma": "^5.4.1",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "stripe": "^13.9.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
