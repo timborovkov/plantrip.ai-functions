@@ -1,0 +1,162 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// When a user signs up, they will be stored in the database
+model User {
+  id                 Int      @id @default(autoincrement())
+  clerkUUID          String   @unique
+  email              String?
+  phone              String?
+  name               String?
+  subscription_level String   @default("free")
+  stripe_customer_id String   @default("")
+  trips              Trip[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+// Each user can have multiple trips
+model Trip {
+  id                Int                 @id @default(autoincrement())
+  title             String
+  notes             String
+  userId            Int
+  planId            Int?
+  hidden            Boolean             @default(false)
+  user              User                @relation(fields: [userId], references: [id])
+  plan              Plan?               @relation(fields: [planId], references: [id])
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  TripAssistantChat TripAssistantChat[]
+}
+
+model TripAssistantChat {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  sender    String   @default("user") // user, assistant or system
+  message   String   @default("")
+  tripId    Int?
+  trip      Trip?    @relation(fields: [tripId], references: [id])
+}
+
+// Once a plan has been generated from OpenAI, it will be stored in the database  
+model Plan {
+  id                   Int          @id @default(autoincrement())
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+  content              String
+  summary              String
+  destination          String
+  duration             String
+  type                 String
+  tripBudget           String       @default("")
+  accommodationBooking String       @default("")
+  travelersCount       Int          @default(1)
+  specialRequests      String       @default("")
+  planDestination      Destination? @relation(fields: [planDestinationId], references: [id])
+  planDestinationId    Int?
+  trips                Trip[]
+  Activities           Activities[]
+  PlanDay              PlanDay[]
+}
+
+model PlanDay {
+  id              Int               @id @default(autoincrement())
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  day             Int
+  planId          Int?
+  plan            Plan?             @relation(fields: [planId], references: [id])
+  PlanDaySections PlanDaySections[]
+}
+
+model PlanDaySections {
+  id                    Int                     @id @default(autoincrement())
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  title                 String
+  planDaySectionDetails PlanDaySectionDetails[]
+  PlanDay               PlanDay?                @relation(fields: [planDayId], references: [id])
+  planDayId             Int?
+}
+
+model PlanDaySectionDetails {
+  id                Int              @id @default(autoincrement())
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  content           String
+  PlanDaySections   PlanDaySections? @relation(fields: [planDaySectionsId], references: [id])
+  planDaySectionsId Int?
+}
+
+model Activities {
+  id                   Int             @id @default(autoincrement())
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+  title                String
+  location             String
+  type                 String
+  google_place_id      String
+  google_place_results String          @default("")
+  activityImages       ActivityImage[]
+  Plans                Plan[]
+}
+
+model ActivityImage {
+  id           Int         @id @default(autoincrement())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  image        String      @default("")
+  Activities   Activities? @relation(fields: [activitiesId], references: [id])
+  activitiesId Int?
+}
+
+model Destination {
+  id                   Int                @id @default(autoincrement())
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  title                String             @unique
+  description          String             @default("")
+  image                String             @default("")
+  google_place_id      String             @unique
+  geocoder_results     String             @default("")
+  google_place_results String             @default("")
+  climate_data         String             @default("")
+  cost_of_living       String             @default("")
+  Plan                 Plan[]
+  Places               Places[]
+  DestinationImage     DestinationImage[]
+}
+
+model DestinationImage {
+  id            Int          @id @default(autoincrement())
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  image         String       @default("")
+  Destination   Destination? @relation(fields: [destinationId], references: [id])
+  destinationId Int?
+}
+
+model Places {
+  id                      Int          @id @default(autoincrement())
+  createdAt               DateTime     @default(now())
+  updatedAt               DateTime     @updatedAt
+  triparvisor_location_id Int
+  title                   String
+  description             String
+  address                 String
+  rating                  String
+  num_reviews             String
+  ranking_string          String
+  type                    String
+  placeDataTripadvisor    String       @default("")
+  placeImages             String       @default("")
+  destinationId           Int?
+  plan                    Destination? @relation(fields: [destinationId], references: [id])
+}
