@@ -79,7 +79,7 @@ router.get<{}, TravelPlanResponseData>(
       tripType,
       destinationPlace,
     }: TravelPlanRequest = req.body;
-    if (!destination || !duration || !tripType || !destinationPlace) {
+    if (!destination || !duration || !tripType) {
       res.status(400).json({ response: "Missing required parameters" });
       return;
     }
@@ -88,10 +88,6 @@ router.get<{}, TravelPlanResponseData>(
       res.status(400).json({ response: "Invalid required parameters" });
       return;
     }
-
-    // Convert destinationPlace in to object
-    const googlePlace: google.maps.GeocoderResult =
-      JSON.parse(destinationPlace);
 
     // Get adittional request parameters
     const tripBudget = req.body.tripBudget ?? "";
@@ -118,7 +114,12 @@ router.get<{}, TravelPlanResponseData>(
         planId: existingPlan.id,
       });
       // Handle destination
-      await createOrUpdateDestination(destination, googlePlace, existingPlan);
+      if (destinationPlace && destinationPlace !== "") {
+        // Convert destinationPlace in to object
+        const googlePlace: google.maps.GeocoderResult =
+          JSON.parse(destinationPlace);
+        await createOrUpdateDestination(destination, googlePlace, existingPlan);
+      }
     } else {
       // Create new plan
       try {
@@ -274,7 +275,12 @@ router.get<{}, TravelPlanResponseData>(
         }
 
         // Handle destination
-        await createOrUpdateDestination(destination, googlePlace, newPlan);
+        if (destinationPlace && destinationPlace !== "") {
+          // Convert destinationPlace in to object
+          const googlePlace: google.maps.GeocoderResult =
+            JSON.parse(destinationPlace);
+          await createOrUpdateDestination(destination, googlePlace, newPlan);
+        }
       } catch (error) {
         console.error("Something went wrong", error);
         res.status(500).json({ response: "Error querying AI engine" });

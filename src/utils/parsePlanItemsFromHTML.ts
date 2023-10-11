@@ -11,7 +11,6 @@ interface PlanDaySectionData {
 }
 
 export function parsePlanItemsFromHTML(html: string): PlanDayData[] {
-  console.log("Parsing plan items from HTML: \n", html, "\n\n");
   // Initialize variables to store the result
   const result: PlanDayData[] = [];
 
@@ -71,6 +70,5 @@ export function parsePlanItemsFromHTML(html: string): PlanDayData[] {
     }
   }
 
-  console.log(JSON.stringify(result, null, 2));
   return result;
 }
