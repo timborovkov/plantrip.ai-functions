@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 export const tripAdvisorOptions = {
   method: "GET",
   headers: {
