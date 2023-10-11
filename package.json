@@ -14,7 +14,6 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "@clerk/clerk-sdk-node": "^4.12.12",
     "@prisma/client": "^5.4.1",
     "@types/google.maps": "^3.54.3",
     "@types/jsdom": "^21.1.3",
