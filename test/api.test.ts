@@ -45,6 +45,7 @@ describe("GET /api/v1/destination-details", () => {
     request(app)
       .get("/api/v1/destination-details?tripid=3")
       .set("Accept", "application/json")
+      .set("Authorization", process.env.API_KEY ?? "")
       .expect("Content-Type", /json/)
       .expect(200, { response: "ok" }, done);
   });
