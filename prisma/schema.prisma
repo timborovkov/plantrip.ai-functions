@@ -130,7 +130,6 @@ model Destination {
   climate_data         String             @default("")
   cost_of_living       String             @default("")
   Plan                 Plan[]
-  Places               Places[]
   DestinationImage     DestinationImage[]
 }
 
@@ -141,22 +140,4 @@ model DestinationImage {
   image         String       @default("")
   Destination   Destination? @relation(fields: [destinationId], references: [id])
   destinationId Int?
-}
-
-model Places {
-  id                      Int          @id @default(autoincrement())
-  createdAt               DateTime     @default(now())
-  updatedAt               DateTime     @updatedAt
-  triparvisor_location_id Int
-  title                   String
-  description             String
-  address                 String
-  rating                  String
-  num_reviews             String
-  ranking_string          String
-  type                    String
-  placeDataTripadvisor    String       @default("")
-  placeImages             String       @default("")
-  destinationId           Int?
-  plan                    Destination? @relation(fields: [destinationId], references: [id])
 }

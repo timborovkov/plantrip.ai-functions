@@ -42,7 +42,6 @@ router.get(
           planDestination: {
             include: {
               DestinationImage: true,
-              Places: true,
             },
           },
         },
@@ -265,17 +264,6 @@ router.get(
           console.error("Failed to generate description", error);
         }
       }
-
-      // Get updated destination
-      await prisma.destination.findUnique({
-        where: {
-          id: destination.id,
-        },
-        include: {
-          DestinationImage: true,
-          Places: true,
-        },
-      });
     } catch (error) {
       console.error(error);
       res.status(500).json({
