@@ -1,8 +1,8 @@
 import express from "express";
 
 import MessageResponse from "../interfaces/MessageResponse";
-import emojis from "./emojis";
 import plan from "./plan";
+import destinationDetails from "./destinationDetails";
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get<{}, MessageResponse>("/", (req, res) => {
   });
 });
 
-router.use("/emojis", emojis);
 router.use("/plan", plan);
+router.use("/destination-details", destinationDetails);
 
 export default router;
