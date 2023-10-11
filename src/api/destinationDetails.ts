@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express, { Request, Response } from "express";
+import fetch from "node-fetch";
 import prisma from "../utils/prisma";
 import openai from "../utils/openai";
 
