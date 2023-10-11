@@ -32,9 +32,20 @@ describe("POST /api/v1/plan", () => {
   it("responds with a json message", (done) => {
     request(app)
       .post("/api/v1/plan")
+      .send({
+        destination: "Helsinki, Finland",
+        duration: "4 days",
+        tripType: "luxury",
+        destinationPlace: "",
+        tripBudget: "1000 EUR",
+        accommodationBooking: "",
+        travelersCount: 1,
+        specialRequests: "",
+      })
       .set("Accept", "application/json")
       .set("Authorization", process.env.API_KEY ?? "")
       .expect("Content-Type", /json/)
-      .expect(200, ["😀", "😳", "🙄"], done);
+      .expect(200)
+      .end(done);
   });
 });
