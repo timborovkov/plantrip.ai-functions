@@ -9,12 +9,9 @@ import { generateHTMLTable } from "../utils/generateHtmlTable";
 const router = express.Router();
 
 type TravelPlanResponseData = {
-  response?: string;
-  html?: string;
+  response: string;
   tripId?: number;
   planId?: number;
-  destinationId?: number;
-  summary?: string;
 };
 
 type TravelPlanRequest = {
@@ -61,14 +58,17 @@ const durationTypes = [
   "1 month",
 ];
 
-router.get<{}, TravelPlanResponseData>(
+router.get(
   "/",
-  async (req: Request, res: Response) => {
+  async (
+    req: Request<TravelPlanRequest>,
+    res: Response<TravelPlanResponseData>
+  ) => {
     // Verify API key
     const apiKey = process.env.API_KEY ?? "";
     const key = req.headers.authorization;
     if ((key === undefined && key === undefined) || key !== apiKey) {
-      res.status(401).json({ error: "not signed in" });
+      res.status(401).json({ response: "not signed in" });
       return;
     }
 
@@ -111,6 +111,7 @@ router.get<{}, TravelPlanResponseData>(
     if (existingPlan) {
       // Send API response
       res.status(200).json({
+        response: "ok",
         planId: existingPlan.id,
       });
       // Handle destination
