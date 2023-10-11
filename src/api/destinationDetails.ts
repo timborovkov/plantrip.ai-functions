@@ -2,10 +2,6 @@ import "dotenv/config";
 import express, { Request, Response } from "express";
 import prisma from "../utils/prisma";
 import openai from "../utils/openai";
-import {
-  fetchTripAdvisorByType,
-  tripAdvisorOptions,
-} from "../utils/fetchTripAdvisorByType";
 
 const router = express.Router();
 
@@ -144,102 +140,6 @@ router.get(
           }
         } catch (error) {
           console.error("Failed getting images", error);
-        }
-      }
-
-      // Does destination have places?
-      if (!destination.Places || destination.Places.length === 0) {
-        // Does not have places yet
-        // Get the places from TripAdvisor
-        // Fetch data for hotels, restaurants, and attractions concurrently
-        try {
-          const [hotelData, restaurantsData, attractionsData] =
-            await Promise.all([
-              fetchTripAdvisorByType("hotels", coords),
-              fetchTripAdvisorByType("restaurants", coords),
-              fetchTripAdvisorByType("attractions", coords),
-            ]);
-
-          // Combine all places
-          const allPlacesData = [
-            ...hotelData,
-            ...restaurantsData,
-            ...attractionsData,
-          ];
-
-          // Fetch details for each place
-          const places: any[] = [];
-          const detailsRequests = [];
-          for (const placeData of allPlacesData) {
-            const request = fetch(
-              `https://api.content.tripadvisor.com/api/v1/location/${placeData.location_id}/details?language=en&key=${process.env.TRIPADVISOR_API_KEY}&currency=EUR`,
-              tripAdvisorOptions
-            )
-              .then((res) => res.json())
-              .then((data) => {
-                if (data) {
-                  places.push(data);
-                }
-              })
-              .catch((error) => {
-                console.error("Failed getting place", error);
-              });
-            detailsRequests.push(request);
-          }
-          await Promise.all(detailsRequests);
-
-          // Fetch images for each place
-          const imageRequests = [];
-          const locationImages: any = [];
-          for (const placeData of allPlacesData) {
-            const request = fetch(
-              `https://api.content.tripadvisor.com/api/v1/location/${placeData.location_id}/photos?key=${process.env.TRIPADVISOR_API_KEY}`,
-              tripAdvisorOptions
-            )
-              .then((res) => res.json())
-              .then((data) => {
-                const images = data.data;
-                if (images && images.length > 0) {
-                  locationImages[placeData.location_id] = [...images];
-                }
-              })
-              .catch((error) => {
-                console.error("Failed getting images", error);
-              });
-            imageRequests.push(request);
-          }
-          await Promise.all(imageRequests);
-
-          // Create places in the database
-          const createPlaceRequests = [];
-          for (let i = 0; i < places.length; i++) {
-            const place = places[i];
-            const images = locationImages[place.location_id] ?? "";
-            if (!parseInt(place.location_id)) {
-              // Invalid place
-              continue;
-            }
-            createPlaceRequests.push(
-              prisma.places.create({
-                data: {
-                  triparvisor_location_id: parseInt(place.location_id),
-                  title: place.name ?? "",
-                  description: place.description ?? "",
-                  address: JSON.stringify(place.address_obj),
-                  rating: place.rating ?? "0",
-                  num_reviews: place.num_reviews ?? "0",
-                  ranking_string: place.ranking_data?.ranking_string ?? "",
-                  type: place.category.name ?? "unknown",
-                  destinationId: destination.id,
-                  placeDataTripadvisor: JSON.stringify(place),
-                  placeImages: JSON.stringify(images),
-                },
-              })
-            );
-          }
-          await Promise.all(createPlaceRequests);
-        } catch (error) {
-          console.error("Error fetching data:", error);
         }
       }
 
