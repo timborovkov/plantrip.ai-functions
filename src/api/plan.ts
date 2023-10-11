@@ -2,7 +2,6 @@ import "dotenv/config";
 import express, { Request, Response } from "express";
 import prisma from "../utils/prisma";
 import openai from "../utils/openai";
-import { getUserFromRequest } from "../utils/getUserFromRequest";
 import { createOrUpdateDestination } from "../utils/createOrUpdateDestination";
 import { parsePlanItemsFromHTML } from "../utils/parsePlanItemsFromHTML";
 import { generateHTMLTable } from "../utils/generateHtmlTable";
