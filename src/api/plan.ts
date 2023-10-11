@@ -58,7 +58,7 @@ const durationTypes = [
   "1 month",
 ];
 
-router.get(
+router.post(
   "/",
   async (
     req: Request<TravelPlanRequest>,
