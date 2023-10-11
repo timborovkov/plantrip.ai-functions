@@ -18,16 +18,6 @@ describe("GET /api/v1", () => {
   });
 });
 
-describe("GET /api/v1/emojis", () => {
-  it("responds with a json message", (done) => {
-    request(app)
-      .get("/api/v1/emojis")
-      .set("Accept", "application/json")
-      .expect("Content-Type", /json/)
-      .expect(200, ["😀", "😳", "🙄"], done);
-  });
-});
-
 describe("POST /api/v1/plan", () => {
   it("responds with a json message", (done) => {
     request(app)
@@ -47,5 +37,15 @@ describe("POST /api/v1/plan", () => {
       .expect("Content-Type", /json/)
       .expect(200)
       .end(done);
+  });
+});
+
+describe("GET /api/v1/destination-details", () => {
+  it("responds with a json message", (done) => {
+    request(app)
+      .get("/api/v1/destination-details?tripid=3")
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200, { response: "ok" }, done);
   });
 });
