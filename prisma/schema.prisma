@@ -26,10 +26,10 @@ model Trip {
   id                Int                 @id @default(autoincrement())
   title             String
   notes             String
-  userId            Int
+  userId            Int?
   planId            Int?
   hidden            Boolean             @default(false)
-  user              User                @relation(fields: [userId], references: [id])
+  user              User?               @relation(fields: [userId], references: [id])
   plan              Plan?               @relation(fields: [planId], references: [id])
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
