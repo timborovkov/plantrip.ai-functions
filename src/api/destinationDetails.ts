@@ -95,7 +95,7 @@ router.get(
             (photo: any) => photo.photo_reference
           );
 
-          if (photoReferences.length > 0) {
+          if (photoReferences && photoReferences.length > 0) {
             // Limit to 4 images
             const maxImages = 4;
             const requests = [];
