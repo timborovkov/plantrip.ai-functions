@@ -4,14 +4,12 @@ export default async function removeUngeneratedDestinations() {
   await prisma.destination.deleteMany({
     where: {
       OR: [
-        { image: "" },
         { title: "" },
         { description: "" },
         { geocoder_results: "" },
         { google_place_results: "" },
         { climate_data: "" },
         { cost_of_living: "" },
-        { DestinationImage: { none: {} } },
       ],
     },
   });
