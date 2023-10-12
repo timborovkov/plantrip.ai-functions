@@ -50,3 +50,14 @@ describe("GET /api/v1/destination-details", () => {
       .expect(200, { response: "ok" }, done);
   });
 });
+
+describe("GET /api/v1/activities", () => {
+  it("responds with a json message", (done) => {
+    request(app)
+      .get("/api/v1/activities?tripid=3")
+      .set("Accept", "application/json")
+      .set("Authorization", process.env.API_KEY ?? "")
+      .expect("Content-Type", /json/)
+      .expect(200, { response: "ok" }, done);
+  });
+});
