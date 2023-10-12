@@ -850,6 +850,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/node-cron@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.9.tgz#e792dd4847804cc37ed90847f45e04e20cd08768"
+  integrity sha512-P10Vf+oagnMbefD31nqjS/dpBM34qzfdpvIgVZwtwsNb0Hg2lDaPFeGcyGUJIqh3zHlDMwYXGeunGgMnswgnPg==
+
 "@types/node-fetch@^2.6.4":
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.6.tgz#b72f3f4bc0c0afee1c0bc9cff68e041d01e3e779"
