@@ -30,6 +30,11 @@ router.get(
         return;
       }
 
+      // Start generating the list, return OK to stop waiting
+      res.status(200).json({
+        response: "ok",
+      });
+
       // Retrieve the plan using the trip ID
       const plan = await prisma.plan.findFirst({
         where: {
@@ -47,26 +52,16 @@ router.get(
           },
         },
       });
+
+      // Check if plan exists
       if (!plan) {
-        res.status(500).json({
-          response: "Plan not found",
-        });
         return;
       }
 
       // Check if plan already has activities
       if (plan.Activities?.length > 0) {
-        // Return the activities if already exist
-        res.status(200).json({
-          response: "ok",
-        });
         return;
       }
-
-      // Start generating the list, return OK to stop waiting
-      res.status(200).json({
-        response: "ok",
-      });
 
       // Generate new activities list if does not exist yet
       // Use OpenAI to get list of venues and locations from plan.content
