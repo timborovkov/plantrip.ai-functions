@@ -282,6 +282,16 @@ router.post(
             JSON.parse(destinationPlace);
           await createOrUpdateDestination(destination, googlePlace, newPlan);
         }
+
+        // Set plan as generated
+        await prisma.plan.update({
+          where: {
+            id: newPlan.id,
+          },
+          data: {
+            generated: true,
+          },
+        });
       } catch (error) {
         console.error("Something went wrong", error);
         res.status(500).json({ response: "Error querying AI engine" });

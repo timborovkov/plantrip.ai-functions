@@ -50,6 +50,7 @@ model Plan {
   id                   Int          @id @default(autoincrement())
   createdAt            DateTime     @default(now())
   updatedAt            DateTime     @updatedAt
+  generated            Boolean      @default(false)
   content              String
   summary              String
   destination          String
