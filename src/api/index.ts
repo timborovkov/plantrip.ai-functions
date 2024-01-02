@@ -5,6 +5,8 @@ import plan from "./plan";
 import destinationDetails from "./destinationDetails";
 import activities from "./activities";
 
+import huggingface from "./huggingface";
+
 const router = express.Router();
 
 router.get<{}, MessageResponse>("/", (req, res) => {
@@ -16,5 +18,7 @@ router.get<{}, MessageResponse>("/", (req, res) => {
 router.use("/plan", plan);
 router.use("/destination-details", destinationDetails);
 router.use("/activities", activities);
+
+router.use("/huggingface", huggingface);
 
 export default router;
