@@ -4,25 +4,24 @@ import { HfInference } from "@huggingface/inference";
 
 const router = express.Router();
 
-const hf = new HfInference(process.env.HUGGINGFACE_WRITE_TOKEN ?? "");
+const hf = new HfInference(process.env.HUGGINGFACE_WRITE_TOKEN ?? "", {
+  use_cache: true,
+  use_gpu: false,
+  wait_for_model: true,
+});
 
+// http://localhost:3300/api/v1/huggingface
 router.get("/", async (req: Request, res: Response) => {
   try {
-    await hf.textGeneration({
+    const results = await hf.textGeneration({
       model: "gpt2",
-      inputs: "The answer to the universe is",
+      inputs:
+        "What should I do in Paris for 5 days in September with my family?",
     });
-
-    for await (const output of hf.textGenerationStream({
-      model: "google/flan-t5-xxl",
-      inputs: 'repeat "one two three four"',
-      parameters: { max_new_tokens: 250 },
-    })) {
-      console.log(output.token.text, output.generated_text);
-    }
 
     res.status(200).json({
       done: true,
+      results,
     });
   } catch (error) {
     console.error(error);
