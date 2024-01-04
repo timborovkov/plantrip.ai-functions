@@ -183,6 +183,7 @@ router.post(
         }
 
         // Combine the properties into the final prompt
+        // Example prompt: Plan a Trip Type: romantic, Destination: Paris, France, Duration: 7 days, Special Requests: Vegetarian trip. Provide a day-by-day itinerary of activities, attractions, hotel, dining and lunch options. Include information about museums, parks, and local events. Put the notes and hotel recommendation at the end.
         const prompt = `Plan a ${properties.join(
           ", "
         )} trip. Provide a day-by-day itinerary of activities, attractions, hotel, dining and lunch options. Include information about museums, parks, and local events. Put the notes and hotel recommendation at the end.`;
