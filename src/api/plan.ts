@@ -5,6 +5,7 @@ import openai from "../utils/openai";
 import { createOrUpdateDestination } from "../utils/createOrUpdateDestination";
 import { parsePlanItemsFromHTML } from "../utils/parsePlanItemsFromHTML";
 import { generateHTMLTable } from "../utils/generateHtmlTable";
+import connectPlanToDestination from "../utils/connectPlanToDestination";
 
 const router = express.Router();
 
@@ -119,7 +120,11 @@ router.post(
         // Convert destinationPlace in to object
         const googlePlace: google.maps.GeocoderResult =
           JSON.parse(destinationPlace);
-        await createOrUpdateDestination(destination, googlePlace, existingPlan);
+        const theDestination = await createOrUpdateDestination(
+          destination,
+          googlePlace
+        );
+        await connectPlanToDestination(theDestination, existingPlan);
       }
     } else {
       // Create new plan
@@ -281,7 +286,11 @@ router.post(
           // Convert destinationPlace in to object
           const googlePlace: google.maps.GeocoderResult =
             JSON.parse(destinationPlace);
-          await createOrUpdateDestination(destination, googlePlace, newPlan);
+          const theDestination = await createOrUpdateDestination(
+            destination,
+            googlePlace
+          );
+          await connectPlanToDestination(theDestination, newPlan);
         }
 
         // Set plan as generated
