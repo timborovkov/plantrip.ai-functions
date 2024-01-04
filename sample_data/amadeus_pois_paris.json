@@ -1,0 +1,219 @@
+[
+  {
+    "id": "827AC5CF93",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/827AC5CF93",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.85677, "longitude": 2.345903 },
+    "name": "Île de la Cité",
+    "category": "RESTAURANT",
+    "rank": 5,
+    "tags": [
+      "restaurant",
+      "tourguide",
+      "attraction",
+      "professionalservices",
+      "landmark",
+      "activities"
+    ]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "F17AA1ED68",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/F17AA1ED68",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.86472, "longitude": 2.34724 },
+    "name": "Osteria Ruggera",
+    "category": "RESTAURANT",
+    "rank": 5,
+    "tags": ["restaurant", "transport"]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "0736828224",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/0736828224",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.85492, "longitude": 2.34523 },
+    "name": "Sainte Chapelle",
+    "category": "SIGHTS",
+    "rank": 10,
+    "tags": [
+      "church",
+      "sightseeing",
+      "temple",
+      "landmark",
+      "tourguide",
+      "sights",
+      "restaurant",
+      "museum",
+      "historicplace",
+      "historic",
+      "mosque",
+      "synagogue",
+      "buddhist",
+      "attraction",
+      "activities",
+      "commercialplace"
+    ]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "31451ED4F2",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/31451ED4F2",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.850277, "longitude": 2.344722 },
+    "name": "Rue Du Sommerard",
+    "category": "RESTAURANT",
+    "rank": 10,
+    "tags": ["restaurant"]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "F0607DF3A9",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/F0607DF3A9",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.852657, "longitude": 2.346962 },
+    "name": "Shakespeare and Company",
+    "category": "SHOPPING",
+    "rank": 15,
+    "tags": [
+      "library",
+      "shopping",
+      "activities",
+      "attraction",
+      "tourguide",
+      "sightseeing",
+      "commercialplace"
+    ]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "8E0ACA101B",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/8E0ACA101B",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.855724, "longitude": 2.345146 },
+    "name": "Palais de Justice de Paris",
+    "category": "SIGHTS",
+    "rank": 15,
+    "tags": [
+      "sightseeing",
+      "sights",
+      "historicplace",
+      "historic",
+      "restaurant",
+      "attraction",
+      "activities",
+      "tourguide",
+      "commercialplace",
+      "landmark"
+    ]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "A45C428A42",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/A45C428A42",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.86474, "longitude": 2.34817 },
+    "name": "Kodama",
+    "category": "RESTAURANT",
+    "rank": 15,
+    "tags": ["restaurant", "tea", "shopping"]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "4A016E0260",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/4A016E0260",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.864735, "longitude": 2.347617 },
+    "name": "en selle Marcel",
+    "category": "SHOPPING",
+    "rank": 15,
+    "tags": ["bike", "shopping"]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "AA8E41776E",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/AA8E41776E",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.852966, "longitude": 2.349902 },
+    "name": "Cathédrale Notre-Dame de Paris",
+    "category": "SIGHTS",
+    "rank": 5,
+    "tags": [
+      "church",
+      "sightseeing",
+      "restaurant",
+      "tourguide",
+      "sights",
+      "temple",
+      "landmark",
+      "historicplace",
+      "historic",
+      "attraction",
+      "activities",
+      "professionalservices",
+      "sports",
+      "bike",
+      "rental",
+      "commercialplace",
+      "outdoorplace"
+    ]
+  },
+  {
+    "type": "location",
+    "subType": "POINT_OF_INTEREST",
+    "id": "EC7AE15DF5",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/reference-data/locations/pois/EC7AE15DF5",
+      "methods": ["GET"]
+    },
+    "geoCode": { "latitude": 48.860825, "longitude": 2.352633 },
+    "name": "Centre Pompidou",
+    "category": "SIGHTS",
+    "rank": 5,
+    "tags": [
+      "museum",
+      "sightseeing",
+      "restaurant",
+      "artgallerie",
+      "tourguide",
+      "sights",
+      "transport",
+      "activities",
+      "attraction",
+      "shopping",
+      "square",
+      "parking",
+      "professionalservices",
+      "bus",
+      "theater",
+      "events",
+      "commercialplace"
+    ]
+  }
+]
