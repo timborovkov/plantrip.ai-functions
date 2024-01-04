@@ -2,12 +2,10 @@ import "dotenv/config";
 import express, { Request, Response } from "express";
 import prisma from "../utils/prisma";
 import openai from "../utils/openai";
-import AmadeusAPI from "../utils/AmadeusAPI";
-import { createOrUpdateDestination } from "../utils/createOrUpdateDestination";
+import { createOrUpdateDestination } from "../utils/destination/createOrUpdateDestination";
+import addActivitiesToDestination from "../utils/destination/addActivitiesToDestination";
 
 const router = express.Router();
-
-const amadeus = new AmadeusAPI();
 
 type TravelPlanResponseData = {
   response: string;
@@ -120,22 +118,17 @@ router.post(
         5. Get a summary of the trip from the LLM based on the fully generated plan
         */
 
-      const pois = await amadeus.searchPOIs({
-        radius: 10,
-        latitude: destinationPlace.geometry.location.lat as any as number,
-        longitude: destinationPlace.geometry.location.lng as any as number,
-      });
-
-      const activities = await amadeus.searchActivities({
-        radius: 10,
-        latitude: destinationPlace.geometry.location.lat as any as number,
-        longitude: destinationPlace.geometry.location.lng as any as number,
-      });
-
-      const theDestination = createOrUpdateDestination(
+      const theDestination = await createOrUpdateDestination(
         destination,
         destinationPlace
       );
+      if (theDestination) {
+        // Add activities to destination
+        const theActivities = await addActivitiesToDestination(
+          destinationPlace,
+          theDestination
+        );
+      }
     } catch (error) {
       console.error(error);
       res.status(500).json({
