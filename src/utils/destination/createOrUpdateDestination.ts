@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
-import prisma from "./prisma";
-import { Plan, Destination } from "@prisma/client";
+import prisma from "../prisma";
+import { Destination } from "@prisma/client";
 
 export async function createOrUpdateDestination(
   destination: string,
