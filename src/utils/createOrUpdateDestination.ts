@@ -4,8 +4,7 @@ import { Plan, Destination } from "@prisma/client";
 
 export async function createOrUpdateDestination(
   destination: string,
-  googlePlace: google.maps.GeocoderResult,
-  existingPlan: Plan
+  googlePlace: google.maps.GeocoderResult
 ): Promise<Destination | undefined> {
   try {
     // Check if destination exists in the database
@@ -53,34 +52,6 @@ export async function createOrUpdateDestination(
           },
         });
       }
-    }
-
-    // Check if destination already has the plan
-    let existingDestinationPlan = await prisma.destination.findFirst({
-      where: {
-        id: existingDestination.id,
-        Plan: {
-          some: {
-            id: existingPlan.id,
-          },
-        },
-      },
-    });
-
-    if (!existingDestinationPlan) {
-      // If the destination does not have the plan, add the plan to the destination
-      await prisma.destination.update({
-        where: {
-          id: existingDestination.id,
-        },
-        data: {
-          Plan: {
-            connect: {
-              id: existingPlan.id,
-            },
-          },
-        },
-      });
     }
 
     return existingDestination;
