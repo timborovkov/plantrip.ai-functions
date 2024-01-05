@@ -4,6 +4,7 @@ import prisma from "../utils/prisma";
 import openai from "../utils/openai";
 import { createOrUpdateDestination } from "../utils/destination/createOrUpdateDestination";
 import addActivitiesToDestination from "../utils/destination/addActivitiesToDestination";
+import addHotelsToDestination from "../utils/destination/addHotelsToDestination";
 
 const router = express.Router();
 
@@ -128,7 +129,11 @@ router.post(
           destinationPlace,
           theDestination
         );
-        console.log(theActivities);
+        // Add hotels to destination
+        const theHotels = await addHotelsToDestination(
+          destinationPlace,
+          theDestination
+        );
       }
     } catch (error) {
       console.error(error);
