@@ -1,11 +1,10 @@
 import "dotenv/config";
 import express, { Request, Response } from "express";
-import prisma from "../utils/prisma";
-import openai from "../utils/openai";
+
 import { createOrUpdateDestination } from "../utils/destination/createOrUpdateDestination";
 import addActivitiesToDestination from "../utils/destination/addActivitiesToDestination";
 import addHotelsToDestination from "../utils/destination/addHotelsToDestination";
-import { ChatCompletionMessageParam } from "openai/resources";
+import getPlanOutline from "../utils/llmRequests/getPlanOutline";
 
 const router = express.Router();
 
@@ -163,46 +162,13 @@ router.post(
             properties.push(`Special Requests: ${specialRequests}`);
           }
 
-          const promptMessages: ChatCompletionMessageParam[] = [
-            {
-              role: "system",
-              content: `You are a travel agent. Plan a trip initiary based on the parameters provided by the user provided, give an outline of the trip day by day for future use`,
-            },
-            {
-              role: "user",
-              content: properties.join(", "),
-            },
-            {
-              role: "system",
-              content: `Some of the things you can do while visiting ${destination} are 
-              visiting ${theActivities
-                .filter((a) => a.category === "sights")
-                .map((a) => a.title)
-                .join(", ")},
-              eating in ${theActivities
-                .filter((a) => a.category === "restaurant")
-                .map((a) => a.title)
-                .join(", ")},
-              shopping in ${theActivities
-                .filter((a) => a.category === "shopping")
-                .map((a) => a.title)
-                .join(", ")}
-              attending in ${theActivities
-                .filter((a) => a.category === "activity")
-                .map((a) => a.title)
-                .join(", ")}
-                `,
-            },
-          ];
-          const apiResponse = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo", // Model maximum tokens: 4097
-            messages: promptMessages,
-            temperature: 0, // randomness
-            max_tokens: 3597,
+          const tripOutline = await getPlanOutline({
+            properties,
+            destination,
+            theActivities,
           });
 
-          const tripFramework =
-            apiResponse.choices[0].message?.content?.trim() || "";
+          console.log(tripOutline);
         }
       }
     } catch (error) {
