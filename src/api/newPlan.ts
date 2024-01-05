@@ -107,20 +107,6 @@ router.post(
     const tripDurationDays = durationTypesInDays(duration);
 
     try {
-      /*
-        Steps:
-        1. Data gathering
-            1.1 Get activities and sights for the requested destination
-            1.2 Get possible hotels for the requested destination
-            1.3 Get restaurants and places to eat for the requested destination
-        2. Combine all of the results in a LLM readable text format
-        3. Send the results and plan query to the LLM engine to get an outline of the trip
-        4. Loop through trip days
-            3.1 Provide the LLM with the "outline" fetched in the previous step
-            3.2 Gather all of the days in to a single response
-        5. Get a summary of the trip from the LLM based on the fully generated plan
-        */
-
       const theDestination = await createOrUpdateDestination(
         destination,
         destinationPlace
@@ -177,7 +163,6 @@ router.post(
             durationInDays: tripDurationDays,
             properties,
           });
-          console.log(getDayByDayPlan);
         }
       }
     } catch (error) {
