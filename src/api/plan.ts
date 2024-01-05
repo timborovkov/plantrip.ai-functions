@@ -3,9 +3,9 @@ import express, { Request, Response } from "express";
 import prisma from "../utils/prisma";
 import openai from "../utils/openai";
 import { createOrUpdateDestination } from "../utils/destination/createOrUpdateDestination";
-import { parsePlanItemsFromHTML } from "../utils/parsePlanItemsFromHTML";
-import { generateHTMLTable } from "../utils/generateHtmlTable";
-import connectPlanToDestination from "../utils/connectPlanToDestination";
+import { parsePlanItemsFromHTML } from "../utils/tools/parsePlanItemsFromHTML";
+import { generateHTMLTable } from "../utils/tools/generateHtmlTable";
+import connectPlanToDestination from "../utils/destination/connectPlanToDestination";
 
 const router = express.Router();
 
