@@ -150,3 +150,12 @@ model DestinationImage {
   Destination   Destination? @relation(fields: [destinationId], references: [id])
   destinationId Int?
 }
+
+model LanguageModelRequests {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  systemRequest  String   @default("")
+  request        String   @default("")
+  reply          String   @default("")
+  fullChatObject String   @default("")
+}
