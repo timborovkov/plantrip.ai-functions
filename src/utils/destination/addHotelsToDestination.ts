@@ -32,7 +32,7 @@ export default async function addHotelsToDestination(
       latitude: destinationPlace.geometry.location.lat as any as number,
       longitude: destinationPlace.geometry.location.lng as any as number,
     });
-    // Create POIs and hotels
+    // Create hotels
     const createHotelsList = [
       ...hotels.map((hotel) => {
         return {
@@ -51,7 +51,16 @@ export default async function addHotelsToDestination(
     await prisma.hotels.createMany({
       data: createHotelsList,
     });
-    return createHotelsList;
+    // Fetch the updated data and return it
+    const updatedDestination = await prisma.destination.findFirst({
+      where: {
+        id: theDestination.id,
+      },
+      include: {
+        Hotels: true,
+      },
+    });
+    return updatedDestination?.Hotels ?? [];
   } catch (error) {
     console.error("addHotelsToDestination", error);
     return [];

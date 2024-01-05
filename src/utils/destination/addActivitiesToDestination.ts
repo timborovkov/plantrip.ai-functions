@@ -67,7 +67,16 @@ export default async function addActivitiesToDestination(
       data: createActivitiesList,
     });
 
-    return createActivitiesList;
+    // Fetch the updated data and return it
+    const updatedDestination = await prisma.destination.findFirst({
+      where: {
+        id: theDestination.id,
+      },
+      include: {
+        Activities: true,
+      },
+    });
+    return updatedDestination?.Activities ?? [];
   } catch (error) {
     console.error("addActivitiesToDestination", error);
     return [];
