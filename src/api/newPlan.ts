@@ -6,6 +6,7 @@ import addActivitiesToDestination from "../utils/destination/addActivitiesToDest
 import addHotelsToDestination from "../utils/destination/addHotelsToDestination";
 import getPlanOutline from "../utils/llmRequests/getPlanOutline";
 import getPlanSummaryUsingOutline from "../utils/llmRequests/getPlanSummaryUsingOutline";
+import getDayByDayPlanUsingOutline from "../utils/llmRequests/getDayByDayPlanUsingOutline";
 
 const router = express.Router();
 
@@ -168,10 +169,15 @@ router.post(
             destination,
             theActivities,
           });
-
           const planSummary = await getPlanSummaryUsingOutline({
             planOutline: planOutline,
           });
+          const getDayByDayPlan = await getDayByDayPlanUsingOutline({
+            planOutline,
+            durationInDays: tripDurationDays,
+            properties,
+          });
+          console.log(getDayByDayPlan);
         }
       }
     } catch (error) {
