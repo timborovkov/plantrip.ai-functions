@@ -134,6 +134,7 @@ router.post(
       }
       return true;
     }
+
     // No existing plan, generate a new one
     try {
       // Create a plan instance
@@ -165,6 +166,7 @@ router.post(
       if (!theDestination) {
         throw new Error("Failed to create/get destination");
       }
+      await connectPlanToDestination(theDestination, newPlan);
 
       // Add activities and hotels to destination
       const theActivities = theDestination.Activities;
