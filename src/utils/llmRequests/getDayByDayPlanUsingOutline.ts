@@ -1,6 +1,7 @@
 import prisma from "../prisma";
 import openai from "../openai";
 import { ChatCompletionMessageParam } from "openai/resources";
+import splitDayInToSections from "../tools/splitDayInToSections";
 
 export default async function getDayByDayPlanUsingOutline({
   planOutline,
@@ -76,8 +77,10 @@ export default async function getDayByDayPlanUsingOutline({
       );
     }
     await Promise.all(createLLMMessages);
-
-    return responsesByDay;
+    const dayByDayPlanResult = responsesByDay.map((a) => {
+      return splitDayInToSections(a);
+    });
+    return dayByDayPlanResult;
   } catch (error) {
     console.error("getDayByDayPlanUsingOutline", error);
     return [];
