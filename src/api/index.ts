@@ -1,10 +1,8 @@
 import express from "express";
 
 import MessageResponse from "../interfaces/MessageResponse";
-import plan from "./plan";
 import destinationDetails from "./destinationDetails";
-
-import newPlan from "./newPlan";
+import createPlan from "./createPlan";
 
 const router = express.Router();
 
@@ -14,9 +12,7 @@ router.get<{}, MessageResponse>("/", (req, res) => {
   });
 });
 
-router.use("/plan", plan);
 router.use("/destination-details", destinationDetails);
-
-router.use("/newPlan", newPlan);
+router.use("/createPlan", createPlan);
 
 export default router;
