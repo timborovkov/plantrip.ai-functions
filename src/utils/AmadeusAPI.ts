@@ -48,14 +48,57 @@ export default class AmadeusAPI {
     }
   }
 
+  async searchHotels(params: {
+    radius: number;
+    latitude: number;
+    longitude: number;
+  }): Promise<any[]> {
+    if (process.env.NODE_ENV !== "production") {
+      const hotels = require("../../sample_data/amadeus_hotels_paris.json");
+      return hotels;
+    }
+    const accessToken = await this.getAccessToken();
+    let results: any[] = [];
+    try {
+      const queryParams = new URLSearchParams({
+        radius: params.radius.toString(),
+        latitude: params.latitude.toString(),
+        longitude: params.longitude.toString(),
+      });
+
+      const response: Response = await fetch(
+        `${
+          this.baseUrl
+        }/v1/reference-data/locations/hotels/by-geocode?${queryParams.toString()}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const { data } = await response.json();
+        results = [...data];
+      } else {
+        throw new Error(`Failed to fetch Hotels: ${response.statusText}`);
+      }
+      return results;
+    } catch (error: any) {
+      console.log(`Failed to fetch Hotels: ${error.message}`);
+      return results;
+    }
+  }
+
   async searchActivities(params: {
     radius: number;
     latitude: number;
     longitude: number;
   }): Promise<any[]> {
     if (process.env.NODE_ENV !== "production") {
-      const pois = require("../../sample_data/amadeus_activities_paris.json");
-      return pois;
+      const activities = require("../../sample_data/amadeus_activities_paris.json");
+      return activities;
     }
     const accessToken = await this.getAccessToken();
     let results: any[] = [];
