@@ -5,6 +5,7 @@ import openai from "../utils/openai";
 import { createOrUpdateDestination } from "../utils/destination/createOrUpdateDestination";
 import addActivitiesToDestination from "../utils/destination/addActivitiesToDestination";
 import addHotelsToDestination from "../utils/destination/addHotelsToDestination";
+import { ChatCompletionMessageParam } from "openai/resources";
 
 const router = express.Router();
 
@@ -134,6 +135,75 @@ router.post(
           destinationPlace,
           theDestination
         );
+        if (theActivities && theHotels) {
+          // Build an LLM readable query
+          // Create an empty array to store the properties
+          const properties = [];
+
+          // Add properties to the array if they are not empty
+          if (tripType && tripType !== "") {
+            properties.push(`Trip Type: ${tripType}`);
+          }
+          if (destination && destination !== "") {
+            properties.push(`Destination: ${destination}`);
+          }
+          if (duration && duration !== "") {
+            properties.push(`Duration: ${duration}`);
+          }
+          if (tripBudget && tripBudget !== "") {
+            properties.push(`Trip Budget: ${tripBudget}`);
+          }
+          if (accommodationBooking && accommodationBooking !== "") {
+            properties.push(`Booked Acommodation: ${accommodationBooking}`);
+          }
+          if (travelersCount !== 1) {
+            properties.push(`Travelers Count: ${travelersCount}`);
+          }
+          if (specialRequests && specialRequests !== "") {
+            properties.push(`Special Requests: ${specialRequests}`);
+          }
+
+          const promptMessages: ChatCompletionMessageParam[] = [
+            {
+              role: "system",
+              content: `You are a travel agent. Plan a trip initiary based on the parameters provided by the user provided, give an outline of the trip day by day for future use`,
+            },
+            {
+              role: "user",
+              content: properties.join(", "),
+            },
+            {
+              role: "system",
+              content: `Some of the things you can do while visiting ${destination} are 
+              visiting ${theActivities
+                .filter((a) => a.category === "sights")
+                .map((a) => a.title)
+                .join(", ")},
+              eating in ${theActivities
+                .filter((a) => a.category === "restaurant")
+                .map((a) => a.title)
+                .join(", ")},
+              shopping in ${theActivities
+                .filter((a) => a.category === "shopping")
+                .map((a) => a.title)
+                .join(", ")}
+              attending in ${theActivities
+                .filter((a) => a.category === "activity")
+                .map((a) => a.title)
+                .join(", ")}
+                `,
+            },
+          ];
+          const apiResponse = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo", // Model maximum tokens: 4097
+            messages: promptMessages,
+            temperature: 0, // randomness
+            max_tokens: 3597,
+          });
+
+          const tripFramework =
+            apiResponse.choices[0].message?.content?.trim() || "";
+        }
       }
     } catch (error) {
       console.error(error);
