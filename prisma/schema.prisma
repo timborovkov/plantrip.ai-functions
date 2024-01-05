@@ -108,6 +108,22 @@ model Activities {
   destination   Destination? @relation(fields: [destinationId], references: [id])
 }
 
+model Hotels {
+  id            Int          @id @default(autoincrement())
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  name          String
+  chainCode     String       @default("")
+  iataCode      String       @default("")
+  dupeId        Int          @default(0)
+  hotelId       String       @default("")
+  geoCode       String       @default("")
+  address       String       @default("")
+  metaData      String       @default("")
+  destinationId Int
+  destination   Destination? @relation(fields: [destinationId], references: [id])
+}
+
 model Destination {
   id                   Int                @id @default(autoincrement())
   createdAt            DateTime           @default(now())
@@ -123,6 +139,7 @@ model Destination {
   Plan                 Plan[]
   DestinationImage     DestinationImage[]
   Activities           Activities[]
+  Hotels               Hotels[]
 }
 
 model DestinationImage {
