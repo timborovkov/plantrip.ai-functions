@@ -61,8 +61,12 @@ export default async function getPlanOutline({
     data: {
       systemRequest: promptMessages
         .filter((a) => a.role === "system")
+        .map((a) => a.content)
         .join("; "),
-      request: promptMessages.filter((a) => a.role === "user").join("; "),
+      request: promptMessages
+        .filter((a) => a.role === "user")
+        .map((a) => a.content)
+        .join("; "),
       reply: tripOutline,
       fullChatObject: JSON.stringify(promptMessages),
     },
