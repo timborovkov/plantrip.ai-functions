@@ -24,6 +24,18 @@ export default async function getDayByDayPlanUsingOutline({
         },
         {
           role: "system",
+          content: `
+          Don't add the day number as a seperate title. This structure involves text divided into sections, each identified by a title (e.g., "Morning:", "Afternoon:", "Evening:"). Titles introduce the purpose of each section, followed by content.  Return the information in this format:
+          Morning:
+          - ABC
+          - XYZ
+
+          Afternoon:
+          - ABC
+          - XYZ`,
+        },
+        {
+          role: "system",
           content: `General information about the trip: ${properties.join(
             ", "
           )}`,
@@ -39,7 +51,7 @@ export default async function getDayByDayPlanUsingOutline({
           model: "gpt-3.5-turbo", // Model maximum tokens: 4097
           messages: promptMessages,
           temperature: 0, // randomness
-          max_tokens: 600,
+          max_tokens: 800,
         })
       );
     }
