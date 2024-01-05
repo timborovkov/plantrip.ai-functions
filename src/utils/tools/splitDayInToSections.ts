@@ -1,4 +1,4 @@
-export default function splitDayInToSections(text: string) {
+export default function splitDayIntoSections(text: string) {
   // Split the text into sections based on the titles (e.g., "Morning:", "Afternoon/Evening:")
   const sections = text.split(/\n(?=\w+:)/);
 
@@ -8,14 +8,27 @@ export default function splitDayInToSections(text: string) {
   // Initialize an array to store the result
   const result = [];
 
+  let currentTitle = "";
+  let currentSections = [];
+
   // Iterate through the sections and extract titles and content
   for (const section of sections) {
     const match = section.match(titlePattern);
     if (match) {
-      const title = match[1];
-      const content = section.replace(titlePattern, "").trim();
-      result.push({ title, content });
+      if (currentTitle !== "") {
+        result.push({ title: currentTitle, sections: currentSections });
+        currentSections = [];
+      }
+      currentTitle = match[1];
     }
+    const content = section.replace(titlePattern, "").trim();
+    currentSections.push(content);
   }
+
+  // Push the last set of sections
+  if (currentTitle !== "") {
+    result.push({ title: currentTitle, sections: currentSections });
+  }
+
   return result;
 }
