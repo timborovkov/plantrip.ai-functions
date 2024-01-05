@@ -11,6 +11,6 @@ router.get<{}, MessageResponse>("/", (req, res) => {
   });
 });
 
-router.use("/createPlan", createPlan);
+router.use("/create-plan", createPlan);
 
 export default router;
