@@ -19,11 +19,11 @@ export default async function addDescriptionToDestination(
         messages: [
           {
             role: "user",
-            content: `Generate HTML text for a description of ${destination.title}. Add sections for safety, history, general knowledge. Make it sound like a human writen promotional text.`,
+            content: `Generate HTML text for a description of ${destination.title}. Add sections for safety, history, general knowledge. Make it sound like a human writen promotional text. Skip the doctype, body, head and other such tags`,
           },
         ],
         temperature: 0.1, // randomness
-        max_tokens: 500,
+        max_tokens: 600,
       });
 
       const descriptionResponseText =
