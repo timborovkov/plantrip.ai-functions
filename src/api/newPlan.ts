@@ -128,6 +128,7 @@ router.post(
           destinationPlace,
           theDestination
         );
+        console.log(theActivities);
       }
     } catch (error) {
       console.error(error);
