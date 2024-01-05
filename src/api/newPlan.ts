@@ -5,6 +5,7 @@ import { createOrUpdateDestination } from "../utils/destination/createOrUpdateDe
 import addActivitiesToDestination from "../utils/destination/addActivitiesToDestination";
 import addHotelsToDestination from "../utils/destination/addHotelsToDestination";
 import getPlanOutline from "../utils/llmRequests/getPlanOutline";
+import getPlanSummaryUsingOutline from "../utils/llmRequests/getPlanSummaryUsingOutline";
 
 const router = express.Router();
 
@@ -162,13 +163,15 @@ router.post(
             properties.push(`Special Requests: ${specialRequests}`);
           }
 
-          const tripOutline = await getPlanOutline({
+          const planOutline = await getPlanOutline({
             properties,
             destination,
             theActivities,
           });
 
-          console.log(tripOutline);
+          const planSummary = await getPlanSummaryUsingOutline({
+            planOutline: planOutline,
+          });
         }
       }
     } catch (error) {

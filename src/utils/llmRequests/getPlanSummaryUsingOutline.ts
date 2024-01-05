@@ -3,9 +3,9 @@ import openai from "../openai";
 import { ChatCompletionMessageParam } from "openai/resources";
 
 export default async function getPlanSummaryUsingOutline({
-  planSummary,
+  planOutline,
 }: {
-  planSummary: string;
+  planOutline: string;
 }) {
   const promptMessages: ChatCompletionMessageParam[] = [
     {
@@ -14,7 +14,7 @@ export default async function getPlanSummaryUsingOutline({
     },
     {
       role: "user",
-      content: planSummary,
+      content: planOutline,
     },
   ];
   const apiResponse = await openai.chat.completions.create({
