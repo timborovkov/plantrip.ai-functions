@@ -2,8 +2,6 @@ import "dotenv/config";
 import express, { Request, Response } from "express";
 
 import { createOrUpdateDestination } from "../utils/destination/createOrUpdateDestination";
-import addActivitiesToDestination from "../utils/destination/addActivitiesToDestination";
-import addHotelsToDestination from "../utils/destination/addHotelsToDestination";
 import getPlanOutline from "../utils/llmRequests/getPlanOutline";
 import getPlanSummaryUsingOutline from "../utils/llmRequests/getPlanSummaryUsingOutline";
 import getDayByDayPlanUsingOutline from "../utils/llmRequests/getDayByDayPlanUsingOutline";
@@ -169,14 +167,8 @@ router.post(
       }
 
       // Add activities and hotels to destination
-      const theActivities = await addActivitiesToDestination(
-        destinationPlace,
-        theDestination
-      );
-      const theHotels = await addHotelsToDestination(
-        destinationPlace,
-        theDestination
-      );
+      const theActivities = theDestination.Activities;
+      const theHotels = theDestination.Hotels;
       if (!theActivities || !theHotels) {
         throw new Error("Failed to create/get activities and hotels");
       }
