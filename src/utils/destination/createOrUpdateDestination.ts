@@ -19,6 +19,24 @@ type DestinationWithDetails = Destination & {
   Hotels: Hotels[];
 };
 
+async function loadData(
+  googlePlace: google.maps.GeocoderResult,
+  theDestination: Destination
+) {
+  try {
+    await Promise.all([
+      addActivitiesToDestination(googlePlace, theDestination),
+      addClimateDataToDestination(theDestination),
+      addCostOfLivingToDestination(theDestination),
+      addDescriptionToDestination(theDestination),
+      addImagesToDestionation(theDestination),
+    ]);
+    console.log("Connected all of the data to destination");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function createOrUpdateDestination(
   destination: string,
   googlePlace: google.maps.GeocoderResult
@@ -33,29 +51,7 @@ export async function createOrUpdateDestination(
     if (existingDestination) {
       // Update everything related to the destination
       console.log("Destination already exists");
-      await Promise.all([
-        async () => {
-          await addActivitiesToDestination(googlePlace, existingDestination);
-        },
-        async () => {
-          await addClimateDataToDestination(existingDestination);
-        },
-        async () => {
-          await addCostOfLivingToDestination(existingDestination);
-        },
-        async () => {
-          await addDescriptionToDestination(existingDestination);
-        },
-        async () => {
-          await addImagesToDestionation(existingDestination);
-        },
-      ])
-        .catch((error) => {
-          console.error(error);
-        })
-        .finally(() => {
-          console.log("Connected all of the data to destination");
-        });
+      await loadData(googlePlace, existingDestination);
       // Refetch destination after updates
       const finalDestination = await prisma.destination.findUnique({
         where: {
@@ -120,29 +116,7 @@ export async function createOrUpdateDestination(
     if (!newDestination) throw new Error("Failed to create a destination");
 
     // Update everything related to the destination
-    await Promise.all([
-      async () => {
-        await addActivitiesToDestination(googlePlace, newDestination);
-      },
-      async () => {
-        await addClimateDataToDestination(newDestination);
-      },
-      async () => {
-        await addCostOfLivingToDestination(newDestination);
-      },
-      async () => {
-        await addDescriptionToDestination(newDestination);
-      },
-      async () => {
-        await addImagesToDestionation(newDestination);
-      },
-    ])
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        console.log("Connected all of the data to destination");
-      });
+    await loadData(googlePlace, newDestination);
 
     // Refetch destination after updates
     const finalDestination = await prisma.destination.findUnique({
