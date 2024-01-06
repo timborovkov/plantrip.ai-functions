@@ -63,7 +63,6 @@ model Plan {
   planDestination      Destination? @relation(fields: [planDestinationId], references: [id])
   planDestinationId    Int?
   trips                Trip[]
-  Activities           Activities[]
   PlanDay              PlanDay[]
 }
 
@@ -97,25 +96,32 @@ model PlanDaySectionDetails {
 }
 
 model Activities {
-  id                   Int             @id @default(autoincrement())
-  createdAt            DateTime        @default(now())
-  updatedAt            DateTime        @updatedAt
-  title                String
-  location             String
-  type                 String
-  google_place_id      String
-  google_place_results String          @default("")
-  activityImages       ActivityImage[]
-  Plans                Plan[]
+  id            Int          @id @default(autoincrement())
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  title         String
+  category      String       @default("") // activity or a POI category
+  thumbnail     String       @default("")
+  bookingLink   String       @default("")
+  amadeusObject String       @default("")
+  destinationId Int
+  destination   Destination? @relation(fields: [destinationId], references: [id])
 }
 
-model ActivityImage {
-  id           Int         @id @default(autoincrement())
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  image        String      @default("")
-  Activities   Activities? @relation(fields: [activitiesId], references: [id])
-  activitiesId Int?
+model Hotels {
+  id            Int          @id @default(autoincrement())
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  name          String
+  chainCode     String       @default("")
+  iataCode      String       @default("")
+  dupeId        Int          @default(0)
+  hotelId       String       @default("")
+  geoCode       String       @default("")
+  address       String       @default("")
+  metaData      String       @default("")
+  destinationId Int
+  destination   Destination? @relation(fields: [destinationId], references: [id])
 }
 
 model Destination {
@@ -132,6 +138,8 @@ model Destination {
   cost_of_living       String             @default("")
   Plan                 Plan[]
   DestinationImage     DestinationImage[]
+  Activities           Activities[]
+  Hotels               Hotels[]
 }
 
 model DestinationImage {
@@ -141,4 +149,13 @@ model DestinationImage {
   image         String       @default("")
   Destination   Destination? @relation(fields: [destinationId], references: [id])
   destinationId Int?
+}
+
+model LanguageModelRequests {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  systemRequest  String   @default("")
+  request        String   @default("")
+  reply          String   @default("")
+  fullChatObject String   @default("")
 }

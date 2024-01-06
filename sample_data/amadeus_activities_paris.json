@@ -1,0 +1,251 @@
+[
+  {
+    "type": "activity",
+    "id": "1747814",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/1747814",
+      "methods": ["GET"]
+    },
+    "name": "Compagnie des Bateaux Mouches Bastille Day Seine River Dinner Cruise",
+    "description": "Have a Champagne dinner cruise, taste a French traditional cooking, prepared on board by our own chef. Enjoy a 2h15 magic cruise with live music! At the end of the dinner, make yourself comfortable and watch the firework display from the upper-deck.",
+    "geoCode": { "latitude": 48.86401059999999, "longitude": 2.3059374 },
+    "rating": "4.3",
+    "price": { "amount": "195.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/07/58.jpg"
+    ],
+    "bookingLink": "http://www.partner.viator.com/en/13257/tours/Paris/Bastille-day-dinner-cruise/d479-23561P13?eap=prod-sRa7AtLuF4UkLYO6mKPY-13257&aid=vba13257en",
+    "minimumDuration": "2 hours"
+  },
+  {
+    "type": "activity",
+    "id": "4791477",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/4791477",
+      "methods": ["GET"]
+    },
+    "name": "Paris: Full-Day Customized Private Walking Tour with a Local",
+    "shortDescription": "Discover the history and culture within Paris on this customized tour. Just let the guide know about your interests and all the legwork will be planned for you. Join a passionate, knowledgeable and engaging local as your guide around this immense city.",
+    "description": "Prior to the tour commencing, inform your guide of some of your interests and hobbies. Your guide will then completely plan a fun day around your interests. Your local guide will then meet you at your hotel of a location of your choosing to begin the tour. \n\nTo get inspired the tour below is an example program. Beginning at 9:00 AM, the tour begins by visiting the Rodin statue outside the hotel, that mostly goes unnoticed. By 10:00 AM you will see Notre Dame, and your guide will highlight the best locations to admire the Cathedral, including local hotspots. Explore the Latin Quarter of the city, around 11:30 think about what you'd like for lunch, and your guide will organize tables on the fly for you. Afterward, walk the romantic Seine river toward Concorde Plaza. See where the Tour de France ends. By 4:00 PM you will arrive to the Moulin Rouge, at the food of Montmartre.\n\nThroughout the day, your guide will instruct you on how to use the metro, so you will be capable to navigate the city for the rest of your stay. See the Bohemians of Paris, visiting the house Van Gogh worked from and Picasso' studio. Visit hidden gems such as the vineyards, the spot Renoir 'created' impressionism and the award-winning back view of the Sacre Coeur. The seven hours will fly passed on this fun adventure. Before parting, have one last break at a small coffee house where your local guide will share some personal insights for your dinner.",
+    "geoCode": { "latitude": 48.85693, "longitude": 2.3412 },
+    "price": { "amount": "434.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://cdn.getyourguide.com/img/tour/5c9cca3309970.jpeg/21.jpg",
+      "https://cdn.getyourguide.com/img/tour/5c9cc9f6c6ddb.jpeg/21.jpg",
+      "https://cdn.getyourguide.com/img/tour/5c9cca02b0183.jpeg/21.jpg"
+    ],
+    "bookingLink": "https://www.getyourguide.com/paris-l16/paris-full-day-customized-private-tour-t226705/?partner_id=B9IC1H4&psrc=partner_api&currency=EUR",
+    "minimumDuration": ""
+  },
+  {
+    "type": "activity",
+    "id": "9596",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/9596",
+      "methods": ["GET"]
+    },
+    "name": "Luxury private day tour to Champagne from Paris",
+    "description": "With this luxury day tour to Champagne, we make sure that you visit and taste only the best the region has to offer. We have crafted this trip with hand picked partners so you can have a perfect experience from start to finish. From the discovery of one of the world’s most prestigious Champagne producers, like Champagne Dom Pérignon or Champagne Ruinart, to the visit of a confidential winery making rare & haute couture champagnes to the passion of your guide who will share his knowledge about wine and Champagne, which is the result of a perfect blend between the land, the climate and century old craftsmanship, this is a perfect day around the world’s most illustrious drink, symbol of prestige and great achievements. Enjoy an exclusive gourmet lunch at a Michelin * restaurant, paired with wines. This tour includes hôtel pick up and drop off by air-conditioned black car or minivan and your private wine expert guide.",
+    "geoCode": { "latitude": 48.8711057, "longitude": 2.3694001 },
+    "rating": "5.0",
+    "price": { "amount": "1000.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/71/05/7b.jpg"
+    ],
+    "bookingLink": "http://www.partner.viator.com/en/13257/tours/Paris/Luxury-private-day-tour-to-Champagne-from-Paris/d479-35428P6?eap=prod-xyxY1Y4tF3MsHDmXNout-13257&aid=vba13257en",
+    "minimumDuration": "11 hours"
+  },
+  {
+    "type": "activity",
+    "id": "9703",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/9703",
+      "methods": ["GET"]
+    },
+    "name": "Guided Visit and Wine Tasting in a Royal Wine Cellar in Paris",
+    "description": "Visit a royal wine cellar in the heart of Paris: discover and learn about French wine in a fun and interactive experience !",
+    "geoCode": { "latitude": 48.8609185, "longitude": 2.3426596 },
+    "rating": "4.5",
+    "price": { "amount": "35.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://media.tacdn.com/media/attractions-splice-spp-674x446/07/75/a7/ea.jpg"
+    ],
+    "bookingLink": "http://www.partner.viator.com/en/13257/tours/Paris/Guided-Visit-and-Wine-Tasting-in-a-Royal-Wine-Cellar-in-Paris/d479-23034P3?eap=prod-fxUokaxbikskDHdLPsA3-13257&aid=vba13257en",
+    "minimumDuration": "1 hour"
+  },
+  {
+    "type": "activity",
+    "id": "3153",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/3153",
+      "methods": ["GET"]
+    },
+    "name": "Luxury Paris, french fashion history walking tour",
+    "description": "We'll walk in the luxury districts near Opera Garnier, Faubourg Saint Honoré street and Madeleine. During this experience you'll discover the history of the most famous luxury fashion brands and learn how to read their collection today. Every brand has a DNA and follows it since the beginning. How? I'll explain.<br>We will enter a lot of first boutiques to discover the luxury universe from inside and see the newest collections.<br><br>Do you know:<br>How a fashion designers did change a women's life?<br>Why Coco Chanel is so famous today and how her men influenced her career?<br>What Yves Saint Laurent hide from everybody?<br>Who is Louis Vuitton and what's his story?<br>Why Hermès is so expensive and inacessible today?<br>What makes us buy and desire fashion brands?<br><br>You'll have the answers during our experience. It's adapted for the \"begginers\" in fashion and people who wants to know how the fashion industry lives.",
+    "geoCode": { "latitude": 48.8579759, "longitude": 2.361014699999999 },
+    "price": { "amount": "26.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://media.tacdn.com/media/attractions-splice-spp-674x446/0a/3f/80/50.jpg"
+    ],
+    "bookingLink": "http://www.partner.viator.com/en/13257/tours/Paris/Luxury-Paris-french-fashion-history-walking-tour/d479-123350P7?eap=prod-fxUokaxbikskDHdLPsA3-13257&aid=vba13257en",
+    "minimumDuration": "1 hour"
+  },
+  {
+    "type": "activity",
+    "id": "2667262",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/2667262",
+      "methods": ["GET"]
+    },
+    "name": "BMX lesson at EGP 18 skatepark, Paris 18th",
+    "shortDescription": "Discover BMX at EGP 18, skatepark in Paris! These BMX lessons with a professional instructor will make you progress quickly!",
+    "description": "<p>Paris BMX Club is a BMX school based in Paris which offers courses all year round, in the EGP 18 in the 18th district, all supervised by passionate and qualified instructors.</p>\n<p>Your BMX teacher will teach you the basics of this urban sport with a theoretical part and a warm-up beforehand, but above all a technical part to know how to learn and succeed the first figures in the skatepark or on the ground. <br />Overcome your fears, learn to fall and get up again, know your limits and go beyond them... These exercises will also help you in life because it is on self-confidence that everything is played! Achieving things you thought impossible will help you progress in all areas.</p>\n<p>Without forgetting that BMX is above all a fun sport, so the teacher will explain to you that you should not only lose sight of the objective but also have a good time and have fun with your bike.</p>\n<p>On the programme:<br />- Learn the basics of BMX, ride up and down a ramp and work on your balance with flat tricks (on the ground).<br />- Discover new tricks according to your level: lift the wheels, do a half turn (180), roll on a wheel (manual), take your hands off, turn the handlebars (barspin), drop a ramp...<br />- Some DIY skills to learn how to repair a bike.</p>\n<p>The courses take place at the EGP 18, with more than 3000 m2 of sliding space, it is the largest covered concrete skate-park in France. It has a permanent cover and two areas for beginners and experienced riders.</p>",
+    "geoCode": { "latitude": 48.899796, "longitude": 2.365714 },
+    "price": { "amount": "35.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2019/01/3904e9293071e6aa3492ffcc9d6ab92a.jpeg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2019/01/99ed4a58c0595a482a40ddb65f406feb.jpeg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2019/01/6b2762381caa497744377990d6f0da72.jpeg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2019/01/54dd1bf0f086554b66888925bd9f2930.jpeg"
+    ],
+    "bookingLink": "https://alentour.adrenaline-hunter.com/en-GB/embedded-booking/activity/9271?_cid=603",
+    "minimumDuration": "1 hour"
+  },
+  {
+    "type": "activity",
+    "id": "2672983",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/2672983",
+      "methods": ["GET"]
+    },
+    "name": "Freestyle BMX course at the Bercy skatepark, in Paris",
+    "shortDescription": "Want to learn a new urban sport? Discover BMX freestyle at the Bercy skatepark in Paris!",
+    "description": "<p>Want to learn a new urban sport? Discover BMX freestyle at the Bercy skatepark in Paris!</p>\n<p>BMX is a physical, technical and very spectacular sport. It is divided into two categories of disciplines. A category for speed called \"race\" in which riders race and a \"freestyle\" section through which riders do exceptional tricks!</p>\n<p>No Limit Coaching offers BMX freestyle lessons in street, flatland or skatepark for beginners or advanced riders. The courses take place at the Bercy skatepark, an easily accessible and covered skatepark. It is equipped with various modules: a \"micro quarter\", a \"manual roof\", a mini \"rainbow ledge\", a mini \"half pyramid\", a \"flat rail\" and a mini \"bank box\".</p>\n<p>You will follow a group or private lesson during which you will benefit from the advice of a professional to progress and reach your goal.</p>\n<p>During your session, you will learn to trust and challenge yourself, to manage risks so that you can get out of your comfort zone. Depending on your level, you will learn various tricks such as jumping, wheel lifting, hands off, backwards, etc.</p>\n<p>Come and learn BMX freestyle at the Bercy skatepark in Paris with No Limit Coaching!</p>",
+    "geoCode": { "latitude": 48.837219, "longitude": 2.37891 },
+    "price": { "amount": "30.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2023/02/58650bd52de7234a3f2b415d68643bb3.jpg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2023/02/8643b4c274f5d205c446871640c0e1b7.jpg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2023/02/dc6d2dcce54638e8bcc66fc2c95db7e7.jpg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2023/02/1bc8695b3074a9585b4b3fd2d69465c0.jpg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2023/02/3cea352db6a363d0521e4f6af455eda7.jpg",
+      "https://media.manawa.com/cache/activity_gallery_zoom_770x500/media/2023/02/cae47852bdeacb40236d67ce00e2341a.jpg"
+    ],
+    "bookingLink": "https://alentour.adrenaline-hunter.com/en-GB/embedded-booking/activity/12114?_cid=603",
+    "minimumDuration": "1 hour 30 minutes"
+  },
+  {
+    "type": "activity",
+    "id": "6378026",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/6378026",
+      "methods": ["GET"]
+    },
+    "name": "Parisian for a day: cooking class & dinner",
+    "description": "What better way to explore a city than by discovering its cuisine first hand? Put on a chef's hat for the day and learn how to make classic dishes, local specialties and impressive plates with our expert hosts. Sign up for one of our fun, immersive cooking classes and discover a new hidden talent!<br><br>Experience the French way of life and share tips in a relaxed atmosphere.\n\n• Learn to cook French classics\n• Discover a typical Parisian apartment\n• In a lively and charming neighborhood near the Eiffel Tower\n• Suitable for all levels\n\nWhat to expect: After a welcome drink, we’ll cook a starter, a main course, and a dessert. Then we’ll enjoy dinner together!\n\nThe price includes ingredients, coffee, tea, the recipes and the dinner.\nClasses are in French or in English, from 4 to 8 people, from 18:00 to 22:00pm.\n\nAbout your host Odile: \n\"I discovered my passion for food when I was 15 years old, watching my mother and grandmother transform produce from the garden into simple yet delicious dishes. They passed their recipes onto me, along with a few tips and tricks, and a joy for sharing meals around the table. This is the rich heritage I in turn wish to bring to my guests.\"",
+    "geoCode": {
+      "latitude": 48.85144206600269,
+      "longitude": 2.2668140488306068
+    },
+    "price": { "amount": "90.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://screen-api.vizeater.co/files/1065139/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065138/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065135/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/468452/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065146/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065144/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065133/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065132/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065142/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065151/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065137/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065136/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065149/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065148/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065143/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065150/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065140/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1461948/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065134/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1065147/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1461949/-/preview/-/progressive/yes/-/format/jpeg/image.jpg"
+    ],
+    "bookingLink": "https://vizeater.co/events/2202?utm_source=amadeus-1381",
+    "minimumDuration": "4 hours"
+  },
+  {
+    "type": "activity",
+    "id": "85749",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/85749",
+      "methods": ["GET"]
+    },
+    "name": "Paris Dark Side Walking Tour",
+    "description": "Our Dark Paris private tour is the ideal way to unveil the most secret & mysterious legends of the City of Lights. From the Antic Latin Quarter to Notre Dame surroundings, and from the Marais to the Haunted Châtelet. It won’t leave you indifferent. Secure your spot now!<br><br>Enjoy a private Paris Evening Tour with a Local Expert Guide.<br><br>Explore the medieval heart of Paris, where each street corner hides stories to reveal.<br><br>Decipher hidden symbols & gothic statues by the churches where dreadful stories happened. <br><br>Discover back alleys where criminals & alchemists haunted for centuries.<br><br>From the Middle Ages to the 1960s, unveil the darkness behind the Parisian nightlife.<br><br>The iconic centre of Paris and Notre Dame cathedral will never look the same after this unique experience!",
+    "geoCode": { "latitude": 48.86514500000001, "longitude": 2.356986 },
+    "rating": "5.0",
+    "price": { "amount": "124.5", "currencyCode": "EUR" },
+    "pictures": [
+      "https://media.tacdn.com/media/attractions-splice-spp-674x446/09/4b/93/c1.jpg"
+    ],
+    "bookingLink": "http://www.partner.viator.com/en/13257/tours/Paris/Dark-Paris-Myths-and-Legends-Small-Group-Walking-Tour-10-max/d479-19551P49?eap=prod-fxUokaxbikskDHdLPsA3-13257&aid=vba13257en",
+    "minimumDuration": "2 hours"
+  },
+  {
+    "type": "activity",
+    "id": "6378381",
+    "self": {
+      "href": "https://test.api.amadeus.com/v1/shopping/activities/6378381",
+      "methods": ["GET"]
+    },
+    "name": "Plant-based, vegan dinner by a Paris chef",
+    "description": "Join the latest culinary trend of immersive and social dining where local hosts invite you into their homes for a magical meal.<br><br>Chef Loly invites you for an organic, vegan, plant-based dinner in her cozy, colorful apartment in the trendy Belleville neighborhood. Your delicious menu will be revealed on the day but, whether you're vegan or not, you're sure to love her bright, creative cuisine. ",
+    "geoCode": {
+      "latitude": 48.874710547131784,
+      "longitude": 2.3764381199709974
+    },
+    "price": { "amount": "60.0", "currencyCode": "EUR" },
+    "pictures": [
+      "https://screen-api.vizeater.co/files/1198678/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1124842/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653113/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653138/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653181/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653120/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198681/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198670/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198669/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653202/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653080/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198668/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198672/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198673/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653057/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198671/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653157/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653266/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653207/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198683/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198677/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653064/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198680/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653246/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653126/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653191/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653147/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653166/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198676/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653173/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653036/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198679/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1124843/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/1198675/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653230/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/653090/-/preview/-/progressive/yes/-/format/jpeg/image.jpg",
+      "https://screen-api.vizeater.co/files/652934/-/preview/-/progressive/yes/-/format/jpeg/image.jpg"
+    ],
+    "bookingLink": "https://vizeater.co/events/30230?utm_source=amadeus-1381",
+    "minimumDuration": "3 hours"
+  }
+]
