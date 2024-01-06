@@ -1,14 +1,20 @@
 import fetch from "node-fetch";
 import prisma from "../prisma";
-import { Destination, DestinationImage } from "@prisma/client";
-
-type DestinationWithImages = Destination & {
-  DestinationImage: DestinationImage[];
-};
+import { Destination } from "@prisma/client";
 
 export default async function addImagesToDestionation(
-  destination: DestinationWithImages
+  theDestination: Destination | null
 ) {
+  if (!theDestination) return [];
+  const destination = await prisma.destination.findFirst({
+    where: {
+      id: theDestination.id,
+    },
+    include: {
+      DestinationImage: true,
+    },
+  });
+  if (!destination) return [];
   // Does destination have images?
   if (
     !destination.DestinationImage ||

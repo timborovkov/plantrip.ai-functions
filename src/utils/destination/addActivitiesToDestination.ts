@@ -6,9 +6,10 @@ const amadeus = new AmadeusAPI();
 
 export default async function addActivitiesToDestination(
   destinationPlace: google.maps.GeocoderResult,
-  theDestination: Destination
+  theDestination: Destination | null
 ) {
   try {
+    if (!theDestination) return [];
     // Get the destination with activities
     const destination = await prisma.destination.findFirst({
       where: {

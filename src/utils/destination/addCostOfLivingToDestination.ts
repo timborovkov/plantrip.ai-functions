@@ -2,13 +2,10 @@ import fetch from "node-fetch";
 import prisma from "../prisma";
 import { Destination, DestinationImage } from "@prisma/client";
 
-type DestinationWithImages = Destination & {
-  DestinationImage: DestinationImage[];
-};
-
 export default async function addCostOfLivingToDestination(
-  destination: DestinationWithImages
+  destination: Destination | null
 ) {
+  if (!destination) return [];
   // Does destination have cost of living data?
   if (!destination.cost_of_living || destination.cost_of_living.length == 0) {
     const formatted_address: string =

@@ -1,14 +1,11 @@
 import fetch from "node-fetch";
 import prisma from "../prisma";
-import { Destination, DestinationImage } from "@prisma/client";
-
-type DestinationWithImages = Destination & {
-  DestinationImage: DestinationImage[];
-};
+import { Destination } from "@prisma/client";
 
 export default async function addClimateDataToDestination(
-  destination: DestinationWithImages
+  destination: Destination | null
 ) {
+  if (!destination) return [];
   // Does destination have climate data?
   if (!destination.climate_data || destination.climate_data.length == 0) {
     // Does not have climate data yet?

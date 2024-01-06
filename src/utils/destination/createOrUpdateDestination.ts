@@ -34,24 +34,23 @@ export async function createOrUpdateDestination(
       // Update everything related to the destination
       await Promise.all([
         async () => {
-          await addActivitiesToDestination(
-            googlePlace,
-            existingDestination as any
-          );
+          await addActivitiesToDestination(googlePlace, existingDestination);
         },
         async () => {
-          await addClimateDataToDestination(existingDestination as any);
+          await addClimateDataToDestination(existingDestination);
         },
         async () => {
-          await addCostOfLivingToDestination(existingDestination as any);
+          await addCostOfLivingToDestination(existingDestination);
         },
         async () => {
-          await addDescriptionToDestination(existingDestination as any);
+          await addDescriptionToDestination(existingDestination);
         },
         async () => {
-          await addImagesToDestionation(existingDestination as any);
+          await addImagesToDestionation(existingDestination);
         },
-      ]);
+      ]).catch((error) => {
+        console.error(error);
+      });
       // Refetch destination after updates
       const finalDestination = await prisma.destination.findUnique({
         where: {
@@ -126,7 +125,9 @@ export async function createOrUpdateDestination(
       async () => {
         await addImagesToDestionation(newDestination);
       },
-    ]);
+    ]).catch((error) => {
+      console.error(error);
+    });
 
     // Refetch destination after updates
     const finalDestination = await prisma.destination.findUnique({
