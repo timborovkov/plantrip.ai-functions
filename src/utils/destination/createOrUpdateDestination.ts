@@ -32,6 +32,7 @@ export async function createOrUpdateDestination(
     });
     if (existingDestination) {
       // Update everything related to the destination
+      console.log("Destination already exists");
       await Promise.all([
         async () => {
           await addActivitiesToDestination(googlePlace, existingDestination);
@@ -48,9 +49,13 @@ export async function createOrUpdateDestination(
         async () => {
           await addImagesToDestionation(existingDestination);
         },
-      ]).catch((error) => {
-        console.error(error);
-      });
+      ])
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          console.log("Connected all of the data to destination");
+        });
       // Refetch destination after updates
       const finalDestination = await prisma.destination.findUnique({
         where: {
@@ -65,12 +70,15 @@ export async function createOrUpdateDestination(
       return finalDestination as DestinationWithDetails;
     }
 
+    console.log("Destination does not yet exist. Creating...");
+
     // ---- Destination does not yet exist ----
     let newDestination: any;
     // Fetch the place details using the Google Places API
     const placeDetailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${googlePlace.place_id}&key=${process.env.GOOGLE_PLACES_API_KEY}`;
     const placeDetailsResponse = await fetch(placeDetailsUrl);
     const placeDetailsData = await placeDetailsResponse.json();
+    console.log("Fetched place details");
 
     // Get the first photo reference from the place details response
     const photoReference =
@@ -78,6 +86,7 @@ export async function createOrUpdateDestination(
 
     // Fetch the image using the photo reference
     if (photoReference) {
+      console.log("Found photo reference");
       const imageUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=${photoReference}&key=${process.env.GOOGLE_PLACES_API_KEY}`;
       const imageResponse = await fetch(imageUrl);
       const imageBuffer = await imageResponse.arrayBuffer();
@@ -93,6 +102,7 @@ export async function createOrUpdateDestination(
         },
       });
     } else {
+      console.log("Did not find photo reference");
       // If no photo reference is available, create the destination without an image
       newDestination = await prisma.destination.create({
         data: {
@@ -104,6 +114,7 @@ export async function createOrUpdateDestination(
         },
       });
     }
+    console.log("Created destination in DB");
 
     // If no new destination available at this point just throw a new error
     if (!newDestination) throw new Error("Failed to create a destination");
@@ -125,9 +136,13 @@ export async function createOrUpdateDestination(
       async () => {
         await addImagesToDestionation(newDestination);
       },
-    ]).catch((error) => {
-      console.error(error);
-    });
+    ])
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        console.log("Connected all of the data to destination");
+      });
 
     // Refetch destination after updates
     const finalDestination = await prisma.destination.findUnique({

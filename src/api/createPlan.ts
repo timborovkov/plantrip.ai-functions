@@ -81,6 +81,8 @@ router.post(
     req: Request<TravelPlanRequest>,
     res: Response<TravelPlanResponseData>
   ) => {
+    console.log("Received a request to generate a plan...");
+
     // Verify request body
     const {
       destination,
@@ -119,6 +121,7 @@ router.post(
     });
 
     if (existingPlan) {
+      console.log("Plan already exists");
       // Send API response
       res.status(200).json({
         response: "ok",
@@ -136,6 +139,7 @@ router.post(
     }
 
     // No existing plan, generate a new one
+    console.log("Plan not created yet");
     try {
       // Create a plan instance
       const newPlan = await prisma.plan.create({
@@ -153,6 +157,7 @@ router.post(
       });
 
       // Return response from API
+      console.log("New plan ID: " + newPlan.id);
       res.status(200).json({
         response: "ok",
         planId: newPlan.id,
@@ -172,6 +177,7 @@ router.post(
       const theActivities = theDestination.Activities;
       const theHotels = theDestination.Hotels;
       if (!theActivities || !theHotels) {
+        console.log("No activities or hotels");
         throw new Error("Failed to create/get activities and hotels");
       }
 
@@ -205,14 +211,17 @@ router.post(
         destination,
         theActivities,
       });
+      console.log("Created plan outline");
       const planSummary = await getPlanSummaryUsingOutline({
         planOutline: planOutline,
       });
+      console.log("Created plan summary");
       const getDayByDayPlan = await getDayByDayPlanUsingOutline({
         planOutline,
         durationInDays: tripDurationDays,
         properties,
       });
+      console.log("Created day by day plan");
 
       // Create everything in the database
       await prisma.plan.update({

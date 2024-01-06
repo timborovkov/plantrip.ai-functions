@@ -21,6 +21,7 @@ export default async function addActivitiesToDestination(
     });
     // Check if destination already has activities
     if (destination && destination?.Activities?.length > 0) {
+      console.log("Destination activities found");
       return destination.Activities;
     }
     if (!destination) {
@@ -28,6 +29,7 @@ export default async function addActivitiesToDestination(
     }
     // No Activities yet, fetch them
     // Get "points of interest" and activity recommendations concurrently
+    console.log("Fetching amadeus, activities");
     const [pois, activities] = await Promise.all([
       amadeus.searchPOIs({
         radius: 10,
@@ -40,6 +42,7 @@ export default async function addActivitiesToDestination(
         longitude: destinationPlace.geometry.location.lng as any as number,
       }),
     ]);
+    console.log("Amadeus activities fetched");
 
     // Create POIs and activities
     const createActivitiesList = [
@@ -67,6 +70,7 @@ export default async function addActivitiesToDestination(
     await prisma.activities.createMany({
       data: createActivitiesList,
     });
+    console.log("Migrated activity data from amadeus to the database");
 
     // Fetch the updated data and return it
     const updatedDestination = await prisma.destination.findFirst({
@@ -77,6 +81,7 @@ export default async function addActivitiesToDestination(
         Activities: true,
       },
     });
+    console.log("Destination activities done");
     return updatedDestination?.Activities ?? [];
   } catch (error) {
     console.error("addActivitiesToDestination", error);

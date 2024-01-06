@@ -20,6 +20,7 @@ export default async function addHotelsToDestination(
     });
     // Check if destination already has hotels
     if (destination && destination?.Hotels?.length > 0) {
+      console.log("Destination hotels found");
       return destination.Hotels;
     }
     if (!destination) {
@@ -27,11 +28,14 @@ export default async function addHotelsToDestination(
     }
     // No Hotels yet, fetch them
     // Get "points of interest" and activity recommendations concurrently
+    console.log("Fetching amadeus, activities");
     const hotels = await amadeus.searchHotels({
       radius: 10,
       latitude: destinationPlace.geometry.location.lat as any as number,
       longitude: destinationPlace.geometry.location.lng as any as number,
     });
+    console.log("Amadeus hotels fetched");
+
     // Create hotels
     const createHotelsList = [
       ...hotels.map((hotel) => {
@@ -51,6 +55,8 @@ export default async function addHotelsToDestination(
     await prisma.hotels.createMany({
       data: createHotelsList,
     });
+    console.log("Migrated hotel data from amadeus to the database");
+
     // Fetch the updated data and return it
     const updatedDestination = await prisma.destination.findFirst({
       where: {
@@ -60,6 +66,8 @@ export default async function addHotelsToDestination(
         Hotels: true,
       },
     });
+    console.log("Destination hotels done");
+
     return updatedDestination?.Hotels ?? [];
   } catch (error) {
     console.error("addHotelsToDestination", error);
