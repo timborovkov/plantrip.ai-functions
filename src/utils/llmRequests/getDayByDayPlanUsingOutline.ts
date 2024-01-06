@@ -1,7 +1,7 @@
 import prisma from "../prisma";
 import openai from "../openai";
 import { ChatCompletionMessageParam } from "openai/resources";
-import splitDayIntoSections from "../tools/splitDayIntoSections";
+import splitDayIntoSections from "../tools/splitDaySections";
 
 export default async function getDayByDayPlanUsingOutline({
   planOutline,
