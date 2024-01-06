@@ -82,6 +82,8 @@ router.post(
     res: Response<TravelPlanResponseData>
   ) => {
     console.log("Received a request to generate a plan...");
+    console.log("The request: ");
+    console.log(JSON.stringify(req.body));
 
     // Verify request body
     const {
