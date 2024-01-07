@@ -6,15 +6,17 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
-    "build": "tsc",
+    "build": "tsc && yarn sentry:sourcemaps",
     "lint": "eslint --fix src test",
     "test": "jest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org plantripai --project node-express ./dist && sentry-cli sourcemaps upload --org plantripai --project node-express ./dist"
   },
   "keywords": [],
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^5.7.1",
+    "@sentry/cli": "^2.24.1",
     "@sentry/node": "^7.92.0",
     "@sentry/profiling-node": "^1.3.2",
     "@types/cors": "^2.8.17",
