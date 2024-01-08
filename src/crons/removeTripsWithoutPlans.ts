@@ -4,7 +4,7 @@ export default async function removeTripsWithoutPlans() {
   // Remove trips without plans
   await prisma.trip.deleteMany({
     where: {
-      planId: null,
+      OR: [{ planId: null }, { userId: null }],
       createdAt: {
         lt: oneDayAgo,
       },

@@ -4,8 +4,8 @@ import removeUngeneratedPlans from "./crons/removeUngeneratedPlans";
 import removeTripsWithoutPlans from "./crons/removeTripsWithoutPlans";
 import removeUngeneratedDestinations from "./crons/removeUngeneratedDestinations";
 
-// Run every 5 minutes
-cron.schedule("* 5 * * *", () => {
+// Run every 15 minutes
+cron.schedule("* 15 * * *", () => {
   console.log("Running cron job");
   (async () => {
     await removeUngeneratedPlans();
