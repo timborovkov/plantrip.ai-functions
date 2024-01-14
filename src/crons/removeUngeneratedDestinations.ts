@@ -2,7 +2,7 @@
 import prisma from "../utils/prisma";
 
 // Function to remove ungenerated destinations
-async function removeUngeneratedDestinations() {
+export default async function removeUngeneratedDestinations() {
   const oneDayAgo = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
 
   try {
