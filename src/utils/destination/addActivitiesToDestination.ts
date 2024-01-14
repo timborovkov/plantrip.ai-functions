@@ -48,21 +48,22 @@ export default async function addActivitiesToDestination(
     const createActivitiesList = [
       ...pois.map((poi) => {
         return {
-          title: poi.name,
-          category: poi.category.toLowerCase(),
+          title: poi.name ?? "",
+          category: poi.category.toLowerCase() ?? "",
           thumbnail: "",
           bookingLink: "",
-          amadeusObject: JSON.stringify(poi),
+          amadeusObject: JSON.stringify(poi) ?? "",
           destinationId: destination?.id,
         };
       }),
       ...activities.map((activity) => {
         return {
-          title: activity.name,
-          category: activity.type.toLowerCase(),
-          thumbnail: activity.pictures[0],
-          bookingLink: activity.bookingLink,
-          amadeusObject: JSON.stringify(activity),
+          title: activity.name ?? "",
+          category: activity.type.toLowerCase() ?? "",
+          thumbnail:
+            (activity.pictures.length > 0 ? activity.pictures[0] : "") ?? "",
+          bookingLink: activity.bookingLink ?? "",
+          amadeusObject: JSON.stringify(activity) ?? "",
           destinationId: destination?.id,
         };
       }),
