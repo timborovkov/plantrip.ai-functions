@@ -57,12 +57,3 @@ export default async function removeUngeneratedDestinations() {
     // Additional error handling as needed
   }
 }
-
-// Execute the function
-removeUngeneratedDestinations()
-  .then(() => {
-    console.log("Operation completed.");
-  })
-  .catch((error) => {
-    console.error("An error occurred:", error);
-  });
