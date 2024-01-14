@@ -34,6 +34,9 @@ model Trip {
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   TripAssistantChat TripAssistantChat[]
+  endDate           String?             @default("")
+  startDate         String?             @default("")
+  isPublic          Boolean             @default(true)
 }
 
 model TripAssistantChat {
