@@ -26,39 +26,6 @@ type TravelPlanRequest = {
   specialRequests: string;
 };
 
-const tripTypes = [
-  "luxury",
-  "romantic",
-  "general",
-  "adventure",
-  "family",
-  "solo",
-  "business",
-  "backpacking",
-  "cultural",
-  "food",
-  "beach",
-  "nature",
-  "sports",
-  "budget",
-];
-
-const durationTypes = [
-  "1 day",
-  "2 days",
-  "3 days",
-  "4 days",
-  "5 days",
-  "6 days",
-  "7 days",
-  "8 days",
-  "9 days",
-  "10 days",
-  "2 weeks",
-  "3 weeks",
-  "1 month",
-];
-
 const durationTypesInDays = (duration: string) => {
   const durationParts = duration.split(" ");
   const value = parseInt(durationParts[0]);
@@ -97,7 +64,7 @@ router.post(
       return;
     }
 
-    if (!tripTypes.includes(tripType) || !durationTypes.includes(duration)) {
+    if (typeof tripType !== "string" || typeof duration !== "string") {
       res.status(400).json({ response: "Invalid required parameters" });
       return;
     }
