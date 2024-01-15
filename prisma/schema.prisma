@@ -84,6 +84,7 @@ model PlanDaySections {
   createdAt             DateTime                @default(now())
   updatedAt             DateTime                @updatedAt
   title                 String
+  places                String                  @default("[]")
   planDaySectionDetails PlanDaySectionDetails[]
   PlanDay               PlanDay?                @relation(fields: [planDayId], references: [id])
   planDayId             Int?
