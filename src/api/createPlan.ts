@@ -152,26 +152,32 @@ router.post(
 
       // Aggregate all properties in to a single array of strings
       const properties = [];
-      if (tripType && tripType !== "") {
-        properties.push(`Trip Type: ${tripType}`);
-      }
       if (destination && destination !== "") {
         properties.push(`Destination: ${destination}`);
       }
       if (duration && duration !== "") {
         properties.push(`Duration: ${duration}`);
       }
-      if (tripBudget && tripBudget !== "") {
-        properties.push(`Trip Budget: ${tripBudget}`);
+      if (tripBudget && tripBudget !== "" && tripBudget !== "0 USD") {
+        // Extract the numerical value from the tripBudget string
+        const numericalValue = parseFloat(tripBudget.replace(/[^0-9.]/g, ""));
+
+        // Check if the numerical value is greater than 100
+        if (!isNaN(numericalValue) && numericalValue > 100) {
+          properties.push(`Trip budget: ${tripBudget}`);
+        }
       }
       if (accommodationBooking && accommodationBooking !== "") {
-        properties.push(`Booked Acommodation: ${accommodationBooking}`);
+        properties.push(`Booked acommodation: ${accommodationBooking}`);
       }
       if (travelersCount !== 1) {
-        properties.push(`Travelers Count: ${travelersCount}`);
+        properties.push(`Travelers count: ${travelersCount}`);
       }
       if (specialRequests && specialRequests !== "") {
-        properties.push(`Special Requests: ${specialRequests}`);
+        properties.push(`Special requests: ${specialRequests}`);
+      }
+      if (tripType && tripType !== "") {
+        properties.push(`Trip tags: ${tripType}`);
       }
 
       // Generate the plan content using the LLM
@@ -206,8 +212,9 @@ router.post(
               const dayNumber = i + 1;
               const sections = day.map((part) => ({
                 title: part.title,
+                places: JSON.stringify(part.places ?? "[]"),
                 planDaySectionDetails: {
-                  create: part.sections.map((a) => ({
+                  create: part.content.map((a) => ({
                     content: a,
                   })),
                 },
