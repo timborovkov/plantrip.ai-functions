@@ -16,11 +16,16 @@ export default async function getPlanOutline({
     const promptMessages: ChatCompletionMessageParam[] = [
       {
         role: "system",
-        content: `You are a travel agent. Plan a trip initiary based on the parameters provided by the user provided, give an outline of the trip day by day for future use. Provide itinerary of activities, attractions, hotel, dining and lunch options. Include information about museums, parks, and local events. Put the notes and hotel recommendation at the end.`,
+        content: `
+        You are a travel agent. Plan a trip initiary based on the parameters provided by the user provided, 
+        give an outline of the trip day by day for future use. Provide itinerary of activities, attractions, 
+        hotel, dining and lunch options. Include information about museums, parks, and local events. 
+        Don't add any sort of notes or anything, just the requested structure.
+        `,
       },
       {
         role: "user",
-        content: properties.join(", "),
+        content: properties.join("; "),
       },
       {
         role: "system",
@@ -45,10 +50,10 @@ export default async function getPlanOutline({
       },
     ];
     const apiResponse = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // Model maximum tokens: 4097
+      model: "gpt-3.5-turbo-1106", // Model maximum tokens: 4097
       messages: promptMessages,
       temperature: 0, // randomness
-      max_tokens: 2200,
+      max_tokens: 1200,
     });
 
     const tripOutline = apiResponse.choices[0].message?.content?.trim() || "";
