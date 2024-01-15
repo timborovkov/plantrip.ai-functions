@@ -20,6 +20,9 @@ export default async function removeUngeneratedDestinations() {
         createdAt: {
           lt: oneDayAgo,
         },
+        Plan: {
+          none: {}, // Ensure that there are no plans connected to the destination
+        },
       },
       select: {
         id: true,
