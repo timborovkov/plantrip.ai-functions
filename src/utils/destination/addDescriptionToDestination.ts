@@ -12,7 +12,7 @@ export default async function addDescriptionToDestination(
     // Use OpenAI to generate a description
     try {
       const apiSummaryResponse = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo", // Model maximum tokens: 4097
+        model: "gpt-3.5-turbo-1106", // Model maximum tokens: 4097
         messages: [
           {
             role: "user",
