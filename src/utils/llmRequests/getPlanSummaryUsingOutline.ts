@@ -21,8 +21,8 @@ export default async function getPlanSummaryUsingOutline({
     const apiResponse = await openai.chat.completions.create({
       model: "gpt-3.5-turbo-1106", // Model maximum tokens: 4097
       messages: promptMessages,
-      temperature: 0, // randomness
-      max_tokens: 400,
+      temperature: 1, // randomness
+      max_tokens: 500,
     });
 
     const tripOutline = apiResponse.choices[0].message?.content?.trim() || "";
