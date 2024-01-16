@@ -43,29 +43,29 @@ export async function createOrUpdateDestination(
   googlePlace: google.maps.GeocoderResult
 ): Promise<DestinationWithDetails | undefined> {
   try {
-    // Check if destination exists in the database
-    let existingDestination = await prisma.destination.findFirst({
-      where: {
-        google_place_id: googlePlace.place_id,
-      },
-    });
-    if (existingDestination) {
-      // Update everything related to the destination
-      console.log("Destination already exists");
-      await loadData(googlePlace, existingDestination);
-      // Refetch destination after updates
-      const finalDestination = await prisma.destination.findUnique({
-        where: {
-          id: existingDestination.id,
-        },
-        include: {
-          Activities: true,
-          Hotels: true,
-          DestinationImage: true,
-        },
-      });
-      return finalDestination as DestinationWithDetails;
-    }
+    // // Check if destination exists in the database
+    // let existingDestination = await prisma.destination.findFirst({
+    //   where: {
+    //     google_place_id: googlePlace.place_id,
+    //   },
+    // });
+    // if (existingDestination) {
+    //   // Update everything related to the destination
+    //   console.log("Destination already exists");
+    //   await loadData(googlePlace, existingDestination);
+    //   // Refetch destination after updates
+    //   const finalDestination = await prisma.destination.findUnique({
+    //     where: {
+    //       id: existingDestination.id,
+    //     },
+    //     include: {
+    //       Activities: true,
+    //       Hotels: true,
+    //       DestinationImage: true,
+    //     },
+    //   });
+    //   return finalDestination as DestinationWithDetails;
+    // }
 
     console.log("Destination does not yet exist. Creating...");
 
@@ -76,6 +76,8 @@ export async function createOrUpdateDestination(
     const placeDetailsResponse = await fetch(placeDetailsUrl);
     const placeDetailsData = await placeDetailsResponse.json();
     console.log("Fetched place details");
+
+    console.log(JSON.stringify(placeDetailsData));
 
     // Get the first photo reference from the place details response
     const photoReference =
