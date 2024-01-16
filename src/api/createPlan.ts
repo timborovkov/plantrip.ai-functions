@@ -7,6 +7,7 @@ import getPlanSummaryUsingOutline from "../utils/llmRequests/getPlanSummaryUsing
 import getDayByDayPlanUsingOutline from "../utils/llmRequests/getDayByDayPlanUsingOutline";
 import prisma from "../utils/prisma";
 import connectPlanToDestination from "../utils/destination/connectPlanToDestination";
+import notifySocketPlanReady from "../utils/notifySocketPlanReady";
 
 const router = express.Router();
 
@@ -104,6 +105,8 @@ router.post(
         );
         await connectPlanToDestination(theDestination, existingPlan);
       }
+      await notifySocketPlanReady(existingPlan.id);
+      console.log("Done processing existing plan 🎉");
       return true;
     }
 
@@ -259,6 +262,7 @@ router.post(
         console.log(
           "Plan generation fully complete! 🎉 \n Plan ID: " + newPlan.id
         );
+        notifySocketPlanReady(newPlan.id);
       } else {
         console.log("Plan save transaction failed, no data was saved.");
       }
