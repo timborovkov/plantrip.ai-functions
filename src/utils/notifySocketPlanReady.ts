@@ -1,5 +1,5 @@
 import "dotenv/config";
-import io from "Socket.IO-client";
+import io from "socket.io-client";
 import prisma from "./prisma";
 export default async function notifySocketPlanReady(planId: number) {
   try {
