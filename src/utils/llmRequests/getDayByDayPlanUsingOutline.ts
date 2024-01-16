@@ -12,50 +12,52 @@ Expand on the activities provided in the outline by the user, add more options. 
 Don't add the day number as a seperate title. This structure involves text divided into sections, each identified by a title (e.g., "Morning:", "Afternoon:", "Evening:", "Dining options:", "Other"...). Titles introduce the purpose of each section, followed by content.  
 The response should be always in JSON format. Each day should have at least sections Morning, Afternoon, Evening and Notes
 Respond exactly in this JSON format:
-[
-  {
-    title: "Section title",
-    content: [
-      "One thing to do in the section",
-      "Another thing to do in the section",
-      "Some information about the places visited during this section",
-      "Another thing to do in the section",
-      
-    ],
-    places: [
-      "Section place highlight 1",
-      "Section place highlight 2",
-    ]
-  },
-  {
-    title: "Section title",
-    content: [
-      "One thing to do in the section",
-      "Another thing to do in the section",
-      "Some information about the places visited during this section",
-      "Another thing to do in the section",
-      
-    ],
-    places: [
-      "Section place highlight 1",
-      "Section place highlight 2",
-    ]
-  },
-  {
-    title: "Section title",
-    content: [
-      "One thing to do in the section",
-      "Another thing to do in the section",
-      "Some information about the places visited during this section",
-      "Another thing to do in the section",
-      
-    ],
-    places: [
-      "Section place highlight 1",
-      "Section place highlight 2",
-    ]
-  },
-]
+{
+  data: [
+    {
+      title: "Section title",
+      content: [
+        "One thing to do in the section",
+        "Another thing to do in the section",
+        "Some information about the places visited during this section",
+        "Another thing to do in the section",
+        
+      ],
+      places: [
+        "Section place highlight 1",
+        "Section place highlight 2",
+      ]
+    },
+    {
+      title: "Section title",
+      content: [
+        "One thing to do in the section",
+        "Another thing to do in the section",
+        "Some information about the places visited during this section",
+        "Another thing to do in the section",
+        
+      ],
+      places: [
+        "Section place highlight 1",
+        "Section place highlight 2",
+      ]
+    },
+    {
+      title: "Section title",
+      content: [
+        "One thing to do in the section",
+        "Another thing to do in the section",
+        "Some information about the places visited during this section",
+        "Another thing to do in the section",
+        
+      ],
+      places: [
+        "Section place highlight 1",
+        "Section place highlight 2",
+      ]
+    },
+  ]
+}
 `;
 
 interface MyJsonFormat {
@@ -66,6 +68,10 @@ interface MyJsonFormat {
 
 function isValidJsonObject(json: any): boolean {
   if (!Array.isArray(json)) {
+    return false;
+  }
+
+  if (json.length < 1) {
     return false;
   }
 
@@ -125,6 +131,7 @@ export default async function getDayByDayPlanUsingOutline({
           messages: promptMessages,
           temperature: 1, // randomness
           max_tokens: 4095,
+          response_format: { type: "json_object" },
         })
       );
     }
@@ -134,12 +141,12 @@ export default async function getDayByDayPlanUsingOutline({
     const responsesByDay: MyJsonFormat[][] = responses.map((a) => {
       try {
         const llmResponse = a.choices[0].message?.content?.trim() || "[]";
-        const parsedJson = JSON.parse(llmResponse);
+        const parsedJson = JSON.parse(llmResponse).data;
         const isValid = isValidJsonObject(parsedJson);
-
         if (isValid) {
           return parsedJson;
         } else {
+          console.log("Not valid JSON: ", llmResponse);
           return [];
         }
       } catch (error) {
