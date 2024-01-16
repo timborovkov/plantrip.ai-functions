@@ -1,6 +1,7 @@
+import "dotenv/config";
 import fetch from "node-fetch";
 import prisma from "../prisma";
-import { Destination, DestinationImage } from "@prisma/client";
+import { Destination } from "@prisma/client";
 
 export default async function addCostOfLivingToDestination(
   destination: Destination | null
