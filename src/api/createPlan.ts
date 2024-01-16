@@ -138,7 +138,8 @@ router.post(
         destinationPlace
       );
       if (!theDestination) {
-        throw new Error("Failed to create/get destination");
+        console.error("Failed to create/get destination");
+        return false;
       }
       await connectPlanToDestination(theDestination, newPlan);
 
@@ -146,8 +147,8 @@ router.post(
       const theActivities = theDestination.Activities;
       const theHotels = theDestination.Hotels;
       if (!theActivities || !theHotels) {
-        console.log("No activities or hotels");
-        throw new Error("Failed to create/get activities and hotels");
+        console.error("Failed to create/get activities and hotels");
+        return false;
       }
 
       // Aggregate all properties in to a single array of strings
@@ -199,41 +200,84 @@ router.post(
       console.log("Created day by day plan");
 
       // Create everything in the database
-      await prisma.plan.update({
-        where: {
-          id: newPlan.id,
-        },
-        data: {
-          generated: true,
-          content: planOutline,
-          summary: planSummary,
-          PlanDay: {
-            create: getDayByDayPlan.map((day, i) => {
-              const dayNumber = i + 1;
-              const sections = day.map((part) => ({
-                title: part.title,
-                places: JSON.stringify(part.places ?? "[]"),
-                planDaySectionDetails: {
-                  create: part.content.map((a) => ({
-                    content: a,
-                  })),
-                },
-              }));
-              return {
-                day: dayNumber,
-                PlanDaySections: {
-                  create: sections,
-                },
-              };
-            }),
-          },
-        },
-      });
 
-      // Plan generation fully complete
-      console.log(
-        "Plan generation fully complete! 🎉 \n Plan ID: " + newPlan.id
+      // Start a transaction
+      const result = await prisma.$transaction(
+        async (prisma) => {
+          try {
+            // Step 1: Update the Plan record
+            const updatedPlan = await prisma.plan.update({
+              where: {
+                id: newPlan.id,
+              },
+              data: {
+                generated: true,
+                content: planOutline,
+                summary: planSummary,
+              },
+            });
+
+            // Step 2 and 3: Create PlanDay records and their nested data
+            for (const [i, day] of getDayByDayPlan.entries()) {
+              const dayNumber = i + 1;
+
+              const planDay = await prisma.planDay.create({
+                data: {
+                  day: dayNumber,
+                  planId: updatedPlan.id, // Reference to the Plan record
+                },
+              });
+
+              const planDaySections = [];
+              for (let i = 0; i < day.length; i++) {
+                const part = day[i];
+                const planDaySectionDetails = await Promise.all(
+                  part.content.map((detail) =>
+                    prisma.planDaySectionDetails.create({
+                      data: {
+                        content: detail,
+                      },
+                    })
+                  )
+                );
+                planDaySections.push({
+                  title: part.title,
+                  places: JSON.stringify(part.places ?? "[]"),
+                  planDayId: planDay.id,
+                  planDaySectionDetails: {
+                    connect: planDaySectionDetails.map((a) => ({ id: a.id })),
+                  },
+                });
+              }
+              const createdSections = await Promise.all(
+                planDaySections.map((section) =>
+                  prisma.planDaySections.create({ data: section })
+                )
+              );
+            }
+
+            return updatedPlan;
+          } catch (error) {
+            console.error(error);
+            return null;
+          }
+        },
+        {
+          maxWait: 5000, // default: 2000
+          timeout: 10000, // default: 5000
+        }
       );
+
+      // Check the result
+      if (result) {
+        // Plan generation fully complete
+        console.log(
+          "Plan generation fully complete! 🎉 \n Plan ID: " + newPlan.id
+        );
+      } else {
+        console.log("Plan save transaction failed, no data was saved.");
+      }
+
       return true;
     } catch (error) {
       console.error(error);
