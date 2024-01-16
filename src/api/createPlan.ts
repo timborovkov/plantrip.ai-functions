@@ -218,42 +218,27 @@ router.post(
             });
 
             // Step 2 and 3: Create PlanDay records and their nested data
-            for (const [i, day] of getDayByDayPlan.entries()) {
+            for (let i = 0; i < getDayByDayPlan.length; i++) {
+              const day = getDayByDayPlan[i];
               const dayNumber = i + 1;
 
-              const planDay = await prisma.planDay.create({
+              await prisma.planDay.create({
                 data: {
                   day: dayNumber,
-                  planId: updatedPlan.id, // Reference to the Plan record
+                  planId: updatedPlan.id,
+                  PlanDaySections: {
+                    create: day.map((part) => ({
+                      title: part.title,
+                      places: JSON.stringify(part.places ?? "[]"),
+                      planDaySectionDetails: {
+                        create: part.content.map((detail) => ({
+                          content: detail,
+                        })),
+                      },
+                    })),
+                  },
                 },
               });
-
-              const planDaySections = [];
-              for (let i = 0; i < day.length; i++) {
-                const part = day[i];
-                const planDaySectionDetails = await Promise.all(
-                  part.content.map((detail) =>
-                    prisma.planDaySectionDetails.create({
-                      data: {
-                        content: detail,
-                      },
-                    })
-                  )
-                );
-                planDaySections.push({
-                  title: part.title,
-                  places: JSON.stringify(part.places ?? "[]"),
-                  planDayId: planDay.id,
-                  planDaySectionDetails: {
-                    connect: planDaySectionDetails.map((a) => ({ id: a.id })),
-                  },
-                });
-              }
-              const createdSections = await Promise.all(
-                planDaySections.map((section) =>
-                  prisma.planDaySections.create({ data: section })
-                )
-              );
             }
 
             return updatedPlan;
