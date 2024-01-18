@@ -12,7 +12,9 @@ export default async function addCostOfLivingToDestination(
     const formatted_address: string =
       JSON.parse(destination.geocoder_results).formatted_address ?? "";
     const city: string = formatted_address.split(", ")[0];
-    const country: string = formatted_address.split(", ")[1];
+    const country =
+      formatted_address.split(", ")[formatted_address.split(", ").length - 1];
+
     if (city && country) {
       // Get the cost of living data from RapidAPI
       try {
