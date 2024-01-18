@@ -17,14 +17,15 @@ type TravelPlanResponseData = {
 };
 
 type TravelPlanRequest = {
-  destination: string;
+  activities: string;
   duration: string;
-  tripType: string;
+  destination: string;
   destinationPlace: google.maps.GeocoderResult;
   tripBudget: string;
-  accommodationBooking: string;
-  travelersCount: number;
+  travelers: string;
   specialRequests: string;
+  startDate: string;
+  endDate: string;
 };
 
 const durationTypesInDays = (duration: string) => {
@@ -53,39 +54,59 @@ router.post(
     console.log("The request: ");
     console.log(JSON.stringify(req.body));
 
-    // Verify request body
+    // Get required request parameters
     const {
-      destination,
+      activities,
       duration,
-      tripType,
+      destination,
       destinationPlace,
-    }: TravelPlanRequest = req.body;
-    if (!destination || !duration || !tripType) {
+      tripBudget,
+      travelers,
+      specialRequests,
+    } = req.body as TravelPlanRequest;
+
+    // Verify request body
+    if (!destination || !duration || !activities) {
       res.status(400).json({ response: "Missing required parameters" });
       return;
     }
 
-    if (typeof tripType !== "string" || typeof duration !== "string") {
+    if (typeof activities !== "string" || typeof duration !== "string") {
       res.status(400).json({ response: "Invalid required parameters" });
       return;
     }
 
     // Get adittional request parameters
-    const tripBudget = req.body.tripBudget ?? "";
-    const accommodationBooking = req.body.accommodationBooking ?? "";
-    const travelersCount = req.body.travelersCount ?? 1;
-    const specialRequests = req.body.specialRequests ?? "";
     const tripDurationDays = durationTypesInDays(duration);
+
+    // Map travelers to a number
+    let travelersCount = 1;
+    if (travelers === "solo") {
+      travelersCount = 1;
+    }
+    if (travelers === "couple") {
+      travelersCount = 2;
+    }
+    if (travelers === "family") {
+      travelersCount = 3;
+    }
+    if (travelers === "friends") {
+      travelersCount = 4;
+    }
+    if (travelers === "group") {
+      travelersCount = 5;
+    }
 
     // Check if plan already exists in the database
     const existingPlan = await prisma.plan.findFirst({
       where: {
         destination: destination,
         duration: duration,
-        type: tripType,
+        type: activities,
         tripBudget: tripBudget,
-        accommodationBooking: accommodationBooking,
+        accommodationBooking: "",
         travelersCount: travelersCount,
+        travelers: travelers,
         specialRequests: specialRequests,
       },
     });
@@ -118,12 +139,12 @@ router.post(
         data: {
           destination: destination,
           duration: duration,
-          type: tripType,
+          type: activities,
           content: "",
           summary: "",
           tripBudget: tripBudget,
-          accommodationBooking: accommodationBooking,
           travelersCount: travelersCount,
+          travelers: travelers,
           specialRequests: specialRequests,
         },
       });
@@ -162,26 +183,17 @@ router.post(
       if (duration && duration !== "") {
         properties.push(`Duration: ${duration}`);
       }
-      if (tripBudget && tripBudget !== "" && tripBudget !== "0 USD") {
-        // Extract the numerical value from the tripBudget string
-        const numericalValue = parseFloat(tripBudget.replace(/[^0-9.]/g, ""));
-
-        // Check if the numerical value is greater than 100
-        if (!isNaN(numericalValue) && numericalValue > 100) {
-          properties.push(`Trip budget: ${tripBudget}`);
-        }
+      if (tripBudget && tripBudget !== "") {
+        properties.push(`Budget: ${tripBudget}`);
       }
-      if (accommodationBooking && accommodationBooking !== "") {
-        properties.push(`Booked acommodation: ${accommodationBooking}`);
+      if (activities && activities !== "") {
+        properties.push(`Preferred activities: ${activities}`);
       }
-      if (travelersCount !== 1) {
-        properties.push(`Travelers count: ${travelersCount}`);
+      if (travelers && travelers !== "") {
+        properties.push(`Who is traveling: ${travelers}`);
       }
       if (specialRequests && specialRequests !== "") {
         properties.push(`Special requests: ${specialRequests}`);
-      }
-      if (tripType && tripType !== "") {
-        properties.push(`Trip tags: ${tripType}`);
       }
 
       // Generate the plan content using the LLM
