@@ -62,6 +62,7 @@ model Plan {
   tripBudget           String       @default("")
   accommodationBooking String       @default("")
   travelersCount       Int          @default(1)
+  travelers            String       @default("")
   specialRequests      String       @default("")
   planDestination      Destination? @relation(fields: [planDestinationId], references: [id])
   planDestinationId    Int?
