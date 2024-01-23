@@ -1,3 +1,4 @@
+import "dotenv/config";
 import * as Sentry from "@sentry/node";
 import { ProfilingIntegration } from "@sentry/profiling-node";
 
@@ -10,9 +11,15 @@ import * as middlewares from "./middlewares";
 import api from "./api";
 import MessageResponse from "./interfaces/MessageResponse";
 
-require("dotenv").config();
+import { LooseAuthProp } from "@clerk/clerk-sdk-node";
 
 const app = express();
+
+declare global {
+  namespace Express {
+    interface Request extends LooseAuthProp {}
+  }
+}
 
 app.use(morgan("dev"));
 app.use(helmet());
