@@ -17,13 +17,35 @@ router.get("/", async (req: Request, res: Response) => {
         select: {
           id: true,
           title: true,
+          user: {
+            select: {
+              name: true,
+            },
+          },
           plan: {
             select: {
               summary: true,
               destination: true,
+              type: true,
               planDestination: {
                 select: {
                   image: true,
+                },
+              },
+              PlanDay: {
+                select: {
+                  day: true,
+                  PlanDaySections: {
+                    select: {
+                      title: true,
+                      places: true,
+                      planDaySectionDetails: {
+                        select: {
+                          content: true,
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },
@@ -56,10 +78,16 @@ router.get("/", async (req: Request, res: Response) => {
         select: {
           id: true,
           title: true,
+          user: {
+            select: {
+              name: true,
+            },
+          },
           plan: {
             select: {
               summary: true,
               destination: true,
+              type: true,
               planDestination: {
                 select: {
                   image: true,
